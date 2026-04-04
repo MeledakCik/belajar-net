@@ -1,4 +1,4 @@
-import { FaInstagram, FaGithub } from "react-icons/fa";
+import { FaInstagram, FaTiktok } from "react-icons/fa";
 
 // Tambahkan prop onCategoryClick
 export default function Footer({ onCategoryClick }: { onCategoryClick: (val: string) => void }) {
@@ -48,11 +48,21 @@ export default function Footer({ onCategoryClick }: { onCategoryClick: (val: str
           <div>
             <h3 className="text-lg font-[family-name:var(--font-jaro)] tracking-widest mb-6 text-white uppercase">Sosial Media</h3>
             <div className="flex gap-5">
-              <a href="#" className="text-gray-400 hover:text-blue-500 transition text-3xl">
+              <a 
+                href="https://instagram.com/username_kamu"
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-pink-500 transition text-3xl"
+              >
                 <FaInstagram />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition text-3xl">
-                <FaGithub />
+              <a 
+                href="https://tiktok.com/@username_kamu"
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition text-3xl"
+              >
+                <FaTiktok />
               </a>
             </div>
           </div>
