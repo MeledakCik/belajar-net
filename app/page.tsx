@@ -72,7 +72,7 @@ export default function Home() {
         </section>
       </section>
       <Jalur searchQuery={searchQuery} />
-      <Footer />
+      <Footer onCategoryClick={setSearchQuery} />
     </main>
   )
 }

@@ -1,6 +1,16 @@
 import { FaInstagram, FaGithub } from "react-icons/fa";
 
-export default function Footer() {
+// Tambahkan prop onCategoryClick
+export default function Footer({ onCategoryClick }: { onCategoryClick: (val: string) => void }) {
+  
+  const handleLinkClick = (e: React.MouseEvent, category: string) => {
+    e.preventDefault();
+    onCategoryClick(category); // Kirim value ke state search di Home
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll otomatis ke atas
+  };
+
+  const navLinks = ["Python", "Next JS", "React", "Web", "Back End", "Front End"];
+
   return (
     <footer className="bg-[#111827] text-white border-t border-gray-800 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
@@ -15,12 +25,16 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-[family-name:var(--font-jaro)] tracking-widest mb-6 text-white uppercase">Navigasi</h3>
             <div className="grid grid-cols-2 gap-y-3 gap-x-4">
-              <a href="#" className="text-gray-400 hover:text-blue-500 transition font-[family-name:var(--font-jaro)] text-sm uppercase">Python</a>
-              <a href="#" className="text-gray-400 hover:text-blue-500 transition font-[family-name:var(--font-jaro)] text-sm uppercase">Next JS</a>
-              <a href="#" className="text-gray-400 hover:text-blue-500 transition font-[family-name:var(--font-jaro)] text-sm uppercase">React</a>
-              <a href="#" className="text-gray-400 hover:text-blue-500 transition font-[family-name:var(--font-jaro)] text-sm uppercase">Web</a>
-              <a href="#" className="text-gray-400 hover:text-blue-500 transition font-[family-name:var(--font-jaro)] text-sm uppercase">Back End</a>
-              <a href="#" className="text-gray-400 hover:text-blue-500 transition font-[family-name:var(--font-jaro)] text-sm uppercase">Front End</a>
+              {navLinks.map((link) => (
+                <a 
+                  key={link}
+                  href="#" 
+                  onClick={(e) => handleLinkClick(e, link)}
+                  className="text-gray-400 hover:text-blue-500 transition font-[family-name:var(--font-jaro)] text-sm uppercase cursor-pointer"
+                >
+                  {link}
+                </a>
+              ))}
             </div>
           </div>
           <div>
