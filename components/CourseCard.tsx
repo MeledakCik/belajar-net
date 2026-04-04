@@ -10,7 +10,7 @@ interface CourseProps {
 export default function CourseCard({ title, desc, icon }: CourseProps) {
   return (
     <Card className="
-      bg-[#1F2937]/60 border-gray-700 
+      bg-[#1F2937]/40 border border-gray-800 
       cursor-pointer group
       transition-all duration-300 ease-out
       hover:border-blue-500 
