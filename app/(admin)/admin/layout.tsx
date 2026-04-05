@@ -17,18 +17,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     if (!mounted) return;
 
     const performSecurityAudit = async () => {
-      // 1. Audit Hardware (Tetap di Client)
+      // 1. Audit Hardware
       const canvas = document.createElement("canvas");
       const gl = canvas.getContext("webgl") as WebGLRenderingContext;
       const debugInfoGl = gl?.getExtension("WEBGL_debug_renderer_info");
       const renderer = debugInfoGl ? gl.getParameter(debugInfoGl.UNMASKED_RENDERER_WEBGL) : "";
       
-      const isHardwareMatch =
-        renderer.toLowerCase().includes("radeon") &&
-        renderer.toLowerCase().includes("amd") &&
-        navigator.hardwareConcurrency >= 12;
+      // Sederhanakan pengecekan agar tidak terlalu sensitif di device kamu
+      const isHardwareMatch = 
+        renderer.toLowerCase().includes("radeon") && 
+        navigator.hardwareConcurrency >= 8; // Kamu bisa turunkan ke 8 jika 12 gagal
 
-      // 2. Ambil Email Session
+      // 2. Ambil Session
       const session = localStorage.getItem("user_session");
       let userEmail = "";
       try {
@@ -40,29 +40,28 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       const localId = localStorage.getItem("DEVICE_UUID");
 
-      // 3. Tanya ke Server (API Auth Check)
+      // 3. Validasi via API (Bukan process.env lagi!)
       try {
-        const response = await fetch("/api/auth-check", {
+        const res = await fetch("/api/auth-check", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ userEmail, isHardwareMatch, localId }),
         });
 
-        const data = await response.json();
+        const data = await res.json();
 
         if (data.success) {
-          if (data.needsRegistration) {
+          if (data.register) {
             localStorage.setItem("DEVICE_UUID", data.key);
             window.location.reload();
-            return;
+          } else {
+            setAuthorized(true);
           }
-          setAuthorized(true);
         } else {
-          throw new Error("Validation Failed");
+          router.push("/");
         }
       } catch (err) {
-        console.error("Critical: Security Validation Failed.");
-        setTimeout(() => router.push("/"), 3000);
+        router.push("/");
       }
     };
 
@@ -74,9 +73,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!authorized) {
     return (
       <div className="h-screen bg-black flex items-center justify-center font-mono">
-        <div className="text-red-500 border border-red-500 p-8 rounded animate-pulse text-center">
-          [!] SECURITY AUDIT IN PROGRESS [!]<br/>
-          <span className="text-xs opacity-50">Checking Hardware Identity...</span>
+        <div className="text-emerald-500 border border-emerald-500 p-8 rounded animate-pulse">
+          [!] CIKAWAN GUARD: VERIFYING HARDWARE... [!]
         </div>
       </div>
     );

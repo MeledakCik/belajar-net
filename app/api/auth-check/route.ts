@@ -1,24 +1,29 @@
+// app/api/auth-check/route.ts
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  const body = await request.json();
-  const { userEmail, isHardwareMatch, localId } = body;
+  try {
+    const body = await request.json();
+    const { userEmail, isHardwareMatch, localId } = body;
 
-  // Variabel ini aman di server, tidak bocor ke browser
-  const REAL_ADMIN = process.env.ADMIN_SECRET_KEY_ADMIN_EMAIL;
-  const REAL_DEVICE = process.env.ADMIN_SECRET_KEY_DEVICE_ID;
+    // Server bisa baca ini, Browser GAK BISA
+    const REAL_ADMIN = process.env.ADMIN_SECRET_KEY_ADMIN_EMAIL;
+    const REAL_DEVICE = process.env.ADMIN_SECRET_KEY_DEVICE_ID;
 
-  // Pengecekan Server-Side
-  const isEmailValid = userEmail === REAL_ADMIN;
-  const isDeviceValid = localId === REAL_DEVICE;
+    if (userEmail === REAL_ADMIN && isHardwareMatch) {
+      // Jika butuh registrasi (UUID belum ada di LocalStorage)
+      if (!localId) {
+        return NextResponse.json({ success: true, register: true, key: REAL_DEVICE });
+      }
+      
+      // Jika UUID ada, cek apakah cocok
+      if (localId === REAL_DEVICE) {
+        return NextResponse.json({ success: true, register: false });
+      }
+    }
 
-  if (isEmailValid && isHardwareMatch) {
-    return NextResponse.json({ 
-      success: true, 
-      needsRegistration: !localId,
-      key: REAL_DEVICE // Kirim key hanya jika hardware & email valid
-    });
+    return NextResponse.json({ success: false }, { status: 401 });
+  } catch (error) {
+    return NextResponse.json({ success: false }, { status: 500 });
   }
-
-  return NextResponse.json({ success: false }, { status: 401 });
 }
