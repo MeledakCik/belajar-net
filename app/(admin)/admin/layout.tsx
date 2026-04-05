@@ -51,7 +51,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       if (userEmail === ADMIN_EMAIL && localId === AUTH_ID && isHardwareMatch) {
         setAuthorized(true);
       } else if (status === "authenticated") {
-        setTimeout(() => router.push("/"), 3000);
+        setTimeout(() => router.push("/"), 1000);
       }
     };
 
