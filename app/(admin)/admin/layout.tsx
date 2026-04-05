@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession, signIn } from "next-auth/react"; // Tambahkan ini
 import Sidebar from "@/components/admin/sidebar";
-
+import { Providers } from "@/components/providers";
 export default function AdminLayout({
   children,
 }: {
@@ -102,7 +102,7 @@ export default function AdminLayout({
     <div className="flex h-screen w-full bg-[#0b0f1a] text-slate-200 font-poppins overflow-hidden">
       <Sidebar />
       <main className="flex-1 h-full p-8 lg:p-12 overflow-y-auto scroll-smooth">
-        {children}
+        <Providers>{children}</Providers>
       </main>
     </div>
   );
