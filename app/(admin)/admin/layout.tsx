@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Sidebar from "@/components/admin/sidebar";
+import { notFound } from "next/navigation";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [authorized, setAuthorized] = useState(false);
@@ -50,11 +51,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         return;
       }
 
-      // 2. Jika Semua Cocok -> Berhasil
       if (userEmail === ADMIN_EMAIL && localId === AUTH_ID && isHardwareMatch) {
         setAuthorized(true);
       } else {
-        setTimeout(() => router.push("/"), 3000);
+        console.error("Critical: Unauthorized Device Detected.");
+        return notFound(); 
       }
     };
 
