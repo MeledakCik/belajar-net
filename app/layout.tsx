@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Akaya_Kanadaka, Jaro,Cabin,Candal, Geist, Geist_Mono, Inria_Sans,Poppins } from "next/font/google";
 import "./globals.css";
-
+import { Providers } from "@/components/providers";
 const jaro = Jaro({
   weight: "400",
   subsets: ["latin"],
@@ -61,7 +61,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${geistSans.variable} ${candal.variable} ${cabin.variable} ${geistMono.variable} ${akaya.variable} ${jaro.variable} ${inria.variable} antialiased`}>
-        {children}
+       <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );
