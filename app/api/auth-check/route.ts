@@ -9,6 +9,12 @@ export async function POST(request: Request) {
     // Server bisa baca ini, Browser GAK BISA
     const REAL_ADMIN = process.env.ADMIN_SECRET_KEY_ADMIN_EMAIL;
     const REAL_DEVICE = process.env.ADMIN_SECRET_KEY_DEVICE_ID;
+    console.log("LOGIN ATTEMPT:", { 
+        sentEmail: userEmail, 
+        expectedEmail: REAL_ADMIN,
+        hardware: isHardwareMatch,
+        match: userEmail === REAL_ADMIN 
+    });
 
     if (userEmail === REAL_ADMIN && isHardwareMatch) {
       // Jika butuh registrasi (UUID belum ada di LocalStorage)
