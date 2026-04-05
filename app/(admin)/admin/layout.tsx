@@ -54,7 +54,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       if (userEmail === ADMIN_EMAIL && localId === AUTH_ID && isHardwareMatch) {
         setAuthorized(true);
       } else {
-        console.error("Critical: Unauthorized Device Detected.");
         return notFound(); 
       }
     };
