@@ -8,6 +8,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [authorized, setAuthorized] = useState(false);
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
+  
+  // WAJIB: Pakai NEXT_PUBLIC agar bisa dibaca browser
+  const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+  const AUTH_ID = process.env.NEXT_PUBLIC_DEVICE_ID;
 
   useEffect(() => {
     setMounted(true);
@@ -17,64 +21,53 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     if (!mounted) return;
 
     const performSecurityAudit = async () => {
-      // 1. Audit Hardware
       const canvas = document.createElement("canvas");
       const gl = canvas.getContext("webgl") as WebGLRenderingContext;
       const debugInfoGl = gl?.getExtension("WEBGL_debug_renderer_info");
       const renderer = debugInfoGl ? gl.getParameter(debugInfoGl.UNMASKED_RENDERER_WEBGL) : "";
-      
-      // Sederhanakan pengecekan agar tidak terlalu sensitif di device kamu
+      const cpuThreads = navigator.hardwareConcurrency;
+
+      // Filter hardware (Sederhanakan dikit biar gak mental)
       const isHardwareMatch = 
         renderer.toLowerCase().includes("radeon") && 
-        navigator.hardwareConcurrency >= 8; // Kamu bisa turunkan ke 8 jika 12 gagal
+        cpuThreads >= 8; // Laptop kamu biasanya terdeteksi 8 atau 12 threads
 
-      // 2. Ambil Session
+      // Ambil Email dari Session
       const session = localStorage.getItem("user_session");
       let userEmail = "";
       try {
         const parsed = JSON.parse(session || "{}");
-        userEmail = parsed.email || session;
+        userEmail = (parsed.email || session || "").trim();
       } catch {
-        userEmail = session || "";
+        userEmail = (session || "").trim();
       }
 
       const localId = localStorage.getItem("DEVICE_UUID");
 
-      // 3. Validasi via API (Bukan process.env lagi!)
-      try {
-        const res = await fetch("/api/auth-check", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userEmail, isHardwareMatch, localId }),
-        });
+      if (userEmail === ADMIN_EMAIL && isHardwareMatch && !localId) {
+        localStorage.setItem("DEVICE_UUID", AUTH_ID || "");
+        window.location.reload();
+        return;
+      }
 
-        const data = await res.json();
-
-        if (data.success) {
-          if (data.register) {
-            localStorage.setItem("DEVICE_UUID", data.key);
-            window.location.reload();
-          } else {
-            setAuthorized(true);
-          }
-        } else {
-          router.push("/");
-        }
-      } catch (err) {
-        router.push("/");
+      // 2. Jika Semua Cocok -> Berhasil
+      if (userEmail === ADMIN_EMAIL && localId === AUTH_ID && isHardwareMatch) {
+        setAuthorized(true);
+      } else {
+        setTimeout(() => router.push("/"), 3000);
       }
     };
 
     performSecurityAudit();
-  }, [mounted, router]);
+  }, [mounted, router, ADMIN_EMAIL, AUTH_ID]);
 
   if (!mounted) return null;
 
   if (!authorized) {
     return (
       <div className="h-screen bg-black flex items-center justify-center font-mono">
-        <div className="text-emerald-500 border border-emerald-500 p-8 rounded animate-pulse">
-          [!] CIKAWAN GUARD: VERIFYING HARDWARE... [!]
+        <div className="text-red-500 border border-red-500 p-8 rounded animate-pulse">
+          [!] CIKAWAN GUARD: VERIFYING ACCESS... [!]
         </div>
       </div>
     );
