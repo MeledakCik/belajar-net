@@ -48,13 +48,6 @@ export default function AdminLayout({
       }
 
       const localId = localStorage.getItem("DEVICE_UUID");
-
-      // Debugging untuk memantau di Console Vercel
-      console.log("--- CIKAWAN SECURITY REPORT ---");
-      console.log("Hardware Match:", isHardwareMatch);
-      console.log("Email Match:", userEmail === ADMIN_EMAIL);
-
-      // Logika Registrasi Device Pertama Kali
       if (userEmail === ADMIN_EMAIL && isHardwareMatch && !localId) {
         localStorage.setItem("DEVICE_UUID", AUTH_ID || "");
         window.location.reload();
@@ -78,7 +71,7 @@ export default function AdminLayout({
     return (
       <div className="h-screen bg-black flex items-center justify-center font-mono">
         <div className="text-red-500 border border-red-500 p-8 rounded animate-pulse">
-          [!] ACCESS DENIED: HARDWARE MISMATCH [!]
+          [!] SEDANG PROSES PENGECEKAN HARDWARE AKSES ADMIN [!]
         </div>
       </div>
     );
