@@ -11,12 +11,14 @@ const akaya = Akaya_Kanadaka({ weight: "400", subsets: ["latin"], variable: "--f
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-poppins" });
+
+// --- VIEWPORT CONFIG (Penting untuk SEO Mobile) ---
 export const viewport: Viewport = {
   themeColor: "#0b0f1a",
   width: "device-width",
   initialScale: 1,
 };
-const REPO_NAME = '/belajar-net';
+
 export const metadata: Metadata = {
   title: {
     default: "Belajar Net - Kuasai Programming",
@@ -58,7 +60,8 @@ export const metadata: Metadata = {
     siteName: "Belajar Net",
     images: [
       {
-        url: `${REPO_NAME}/image/logo.png`,
+        
+        url: "/image/logo.png",
         width: 1200,
         height: 630,
         alt: "Preview Belajar Net",
@@ -71,12 +74,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Belajar Net - Platform Belajar Coding Seru",
     description: "Platform gamifikasi belajar pemrograman gratis untuk pemula. Kuasai Python, Next.js, React, HTML, CSS, JS, dengan materi yang mudah dimengerti.",
-    images: [`${REPO_NAME}/image/logo.png`],
+    images: ["/image/logo.png"],
   },
   icons: {
-    icon: `${REPO_NAME}/image/logo.png`,
-    shortcut: `${REPO_NAME}/image/logo.png`,
-    apple: `${REPO_NAME}/image/logo.png`,
+    icon: "/image/logo.png",
+    shortcut: "/image/logo.png",
+    apple: "/image/logo.png",
   },
 };
 
