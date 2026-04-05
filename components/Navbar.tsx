@@ -44,6 +44,7 @@ export default function Navbar({ onSearchChange }: { onSearchChange: (val: strin
             <div className="relative w-40 md:w-72 hidden sm:block">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4" />
               <Input 
+                name="search"
                 placeholder="Cari materi..." 
                 onChange={(e) => onSearchChange(e.target.value)} // Hubungkan ke fungsi filter
                 className="bg-[#1F2937] border-gray-700 pl-10 h-9 focus:ring-blue-500 text-white font-[family-name:var(--font-inria)]"
@@ -65,6 +66,7 @@ export default function Navbar({ onSearchChange }: { onSearchChange: (val: strin
             <div className="relative w-full mt-2">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4" />
               <Input 
+                name="search"
                 placeholder="Cari materi..." 
                 onChange={(e) => onSearchChange(e.target.value)} // Tetap berfungsi di mobile
                 className="bg-[#1F2937] border-gray-700 pl-10 text-white w-full text-md font-poppins"
