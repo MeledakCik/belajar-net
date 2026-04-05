@@ -20,6 +20,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.belajarnet.biz.id"),
   title: {
     default: "Belajar Net - Kuasai Programming",
     template: "%s | Belajar Net",

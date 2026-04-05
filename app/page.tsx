@@ -45,7 +45,14 @@ export default function Home() {
             </div>
             <div className="w-full md:w-2/5 flex justify-center md:justify-end mt-4 md:mt-0">
               <div className="relative w-full max-w-[300px] md:max-w-[450px] aspect-video rounded-2xl overflow-hidden shadow-lg border border-gray-700">
-                <Image src="/image/belajar.png" alt="Hero" fill className="object-cover" priority />
+                <Image 
+                  src="/image/belajar.png" 
+                  alt="Belajar Programming" 
+                  fill 
+                  className="object-cover" 
+                  priority 
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px" 
+                />
               </div>
             </div>
           </div>
