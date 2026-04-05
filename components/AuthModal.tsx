@@ -75,19 +75,6 @@ export default function AuthModal({ isOpen, onClose }: { isOpen: boolean; onClos
                 </div>
               </div>
 
-              {mode === "register" && (
-                <div className="space-y-1.5">
-                  <Label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">OTP Code</Label>
-                  <div className="relative flex gap-2">
-                    <div className="relative flex-1">
-                      <ShieldCheck className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" />
-                      <Input placeholder="Enter OTP" className="border-none bg-[#161e2d] pl-12 py-6 rounded-xl text-sm focus-visible:ring-1 focus-visible:ring-blue-500 font-[family-name:var(--font-poppins)]" />
-                    </div>
-                    <Button className="bg-blue-600 hover:bg-blue-700 h-auto px-4 rounded-xl font-bold uppercase text-[10px] transition-all active:scale-95">Send</Button>
-                  </div>
-                </div>
-              )}
-
               <div className="space-y-1.5">
                 <Label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Password</Label>
                 <div className="relative">
