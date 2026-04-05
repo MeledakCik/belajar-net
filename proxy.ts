@@ -1,23 +1,25 @@
-import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
+// proxy.ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-export async function POST(request: Request) {
-  const body = await request.json();
-  const { hardwareMatch, userEmail } = body;
+// GANTI: Nama fungsi harus 'proxy' atau gunakan 'export default'
+export function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
 
-  const ADMIN_EMAIL = process.env.ADMIN_EMAIL; // Ambil dari server env
-  const SECRET_KEY = process.env.ADMIN_SECRET_KEY;
-  if (userEmail === ADMIN_EMAIL && hardwareMatch === true) {
-    (await cookies()).set("cikawan_token", SECRET_KEY || "", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-      path: "/",
-      maxAge: 60 * 60 * 24, // 1 hari
-    });
+  // Logika pengecekan cookie Cikawan Guard
+  if (pathname.startsWith('/admin')) {
+    const authCookie = request.cookies.get('cikawan_auth')?.value;
+    const adminSecret = process.env.ADMIN_SECRET_KEY;
 
-    return NextResponse.json({ success: true });
+    if (!authCookie || authCookie !== adminSecret) {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
   }
 
-  return NextResponse.json({ success: false }, { status: 401 });
+  return NextResponse.next();
 }
+
+// Config tetap sama untuk menentukan route mana yang di-proxy
+export const config = {
+  matcher: '/admin/:path*',
+};
