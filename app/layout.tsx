@@ -21,10 +21,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Belajar Net - Kuasai Programming & Cyber Security",
+    default: "Belajar Net - Kuasai Programming",
     template: "%s | Belajar Net",
   },
-  description: "Platform gamifikasi belajar pemrograman gratis untuk pemula. Kuasai Python, Next.js, React, HTML, CSS, JS, hingga Cyber Security dengan materi yang mudah dimengerti.",
+  description: "Platform gamifikasi belajar pemrograman gratis untuk pemula. Kuasai Python, Next.js, React, HTML, CSS, JS, dengan materi yang mudah dimengerti.",
   keywords: [
     "belajar ngoding", 
     "belajar net", 
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Belajar Net - Platform Belajar Coding Seru",
-    description: "Platform belajar Python, Next.js, dan Cyber Security untuk pemula.",
+    description: "Platform gamifikasi belajar pemrograman gratis untuk pemula. Kuasai Python, Next.js, React, HTML, CSS, JS, dengan materi yang mudah dimengerti.",
     images: ["/image/logo.png"],
   },
   icons: {
