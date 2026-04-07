@@ -70,7 +70,7 @@ export default function AboutWithNavbar() {
         onClose={() => setShowLoginModal(false)}
       />
 
-      <section className="max-w-7xl mx-auto px-2 pt-5 md:pt-10">
+      <section className="max-w-7xl mx-auto px-6 pt-5 md:pt-10">
         <div className="bg-gradient-to-br from-[#1F2937] to-[#111827] rounded-[10px] border border-gray-800 relative overflow-hidden group min-h-[600px] flex flex-col shadow-2xl">
           <div className="flex overflow-x-auto border-b border-gray-800 bg-[#111827]/30 backdrop-blur-sm scrollbar-hide">
             {[
@@ -106,7 +106,8 @@ export default function AboutWithNavbar() {
           </div>
 
           <div className="p-8 md:p-20 flex flex-col lg:flex-row items-center gap-12 relative z-10 flex-grow">
-            <div className="w-full lg:w-1/3 flex justify-center order-2 lg:order-1">
+            {/* Container Gambar Maskot */}
+            <div className="hidden lg:flex w-full lg:w-1/3 justify-center order-2 lg:order-1">
               <div className="relative w-48 h-48 md:w-64 md:h-64">
                 <Image
                   src="/image/logo.png"
