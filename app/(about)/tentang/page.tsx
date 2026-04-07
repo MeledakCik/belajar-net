@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Icon } from "@iconify/react";
 import AuthModal from "@/components/AuthModal";
 import Link from "next/link";
-
 export default function AboutWithNavbar() {
   const [activeTab, setActiveTab] = useState("about");
   const [isLoggedIn] = useState(false);

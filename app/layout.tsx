@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from "next"; // Tambahkan Viewport untuk mobile optimization
 import { Akaya_Kanadaka, Jaro, Cabin, Candal, Geist, Geist_Mono, Inria_Sans, Poppins } from "next/font/google";
 import "./globals.css";
-
-// --- FONT CONFIGURATION ---
 const jaro = Jaro({ weight: "400", subsets: ["latin"], variable: "--font-jaro" });
 const candal = Candal({ weight: "400", subsets: ["latin"], variable: "--font-candal" });
 const cabin = Cabin({ weight: "400", subsets: ["latin"], variable: "--font-cabin" });
@@ -11,8 +9,6 @@ const akaya = Akaya_Kanadaka({ weight: "400", subsets: ["latin"], variable: "--f
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-poppins" });
-
-// --- VIEWPORT CONFIG (Penting untuk SEO Mobile) ---
 export const viewport: Viewport = {
   themeColor: "#0b0f1a",
   width: "device-width",
