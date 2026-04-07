@@ -5,11 +5,9 @@ import { Input } from "@/components/ui/input"
 import { Search, Menu, X } from "lucide-react"
 import Image from "next/image"
 import AuthModal from '@/components/AuthModal'
-
-// Tambahkan definisi prop onSearchChange
 export default function Navbar({ onSearchChange }: { onSearchChange: (val: string) => void }) {
   const [isOpen, setIsOpen] = useState(false)
-  const [isLoggedIn] = useState(false) // Simulasi status login (Ganti ke true jika ingin tes masuk)
+  const [isLoggedIn] = useState(false)
   const [showLoginModal, setShowLoginModal] = useState(false)
 
   const handleStartLearning = () => {
@@ -46,7 +44,7 @@ export default function Navbar({ onSearchChange }: { onSearchChange: (val: strin
               <Input 
                 name="search"
                 placeholder="Cari materi..." 
-                onChange={(e) => onSearchChange(e.target.value)} // Hubungkan ke fungsi filter
+                onChange={(e) => onSearchChange(e.target.value)}
                 className="bg-[#1F2937] border-gray-700 pl-10 h-9 focus:ring-blue-500 text-white font-[family-name:var(--font-inria)]"
               />
             </div>
@@ -68,7 +66,7 @@ export default function Navbar({ onSearchChange }: { onSearchChange: (val: strin
               <Input 
                 name="search"
                 placeholder="Cari materi..." 
-                onChange={(e) => onSearchChange(e.target.value)} // Tetap berfungsi di mobile
+                onChange={(e) => onSearchChange(e.target.value)}
                 className="bg-[#1F2937] border-gray-700 pl-10 text-white w-full text-md font-poppins"
               />
             </div>

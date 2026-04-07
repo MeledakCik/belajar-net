@@ -60,7 +60,7 @@ const PATH_DATA: PathType[] = [
 
 const CodingPath = ({ searchQuery = "" }: { searchQuery?: string }) => {
   const [loading] = useState(false)
-  const [isLoggedIn] = useState(false) // Simulasi status login (Ganti ke true jika ingin tes masuk)
+  const [isLoggedIn] = useState(false)
   const [showLoginModal, setShowLoginModal] = useState(false)
 
   const handleStartLearning = () => {

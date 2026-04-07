@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; // Import router
-import { toast, Toaster } from "sonner"; // Import toast
+import { useRouter } from "next/navigation";
+import { toast, Toaster } from "sonner";
 import {
   EyeOff,
   Eye,
@@ -27,7 +27,7 @@ export default function AuthModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
-  const router = useRouter(); // Inisialisasi router
+  const router = useRouter();
   const [mode, setMode] = useState<"login" | "register">("login");
   const [showPass, setShowPass] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
@@ -50,8 +50,6 @@ export default function AuthModal({
 
   const handleSubmit = async () => {
     const newErrors: { [key: string]: string } = {};
-
-    // Validasi Frontend (Sesuai permintaan filter sebelumnya)
     if (mode === "register") {
       if (!formData.fullName) newErrors.fullName = "Nama lengkap wajib diisi";
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

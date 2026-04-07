@@ -1,12 +1,10 @@
 import { FaInstagram, FaTiktok } from "react-icons/fa";
-
-// Tambahkan prop onCategoryClick
 export default function Footer({ onCategoryClick }: { onCategoryClick: (val: string) => void }) {
   
   const handleLinkClick = (e: React.MouseEvent, category: string) => {
     e.preventDefault();
-    onCategoryClick(category); // Kirim value ke state search di Home
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll otomatis ke atas
+    onCategoryClick(category); 
+    window.scrollTo({ top: 0, behavior: 'smooth' }); 
   };
 
   const navLinks = ["Python", "Next JS", "React", "Web", "Back End", "Front End"];

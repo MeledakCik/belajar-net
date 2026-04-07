@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next"; // Tambahkan Viewport untuk mobile optimization
+import type { Metadata, Viewport } from "next"; 
 import { Akaya_Kanadaka, Jaro, Cabin, Candal, Geist, Geist_Mono, Inria_Sans, Poppins } from "next/font/google";
 import "./globals.css";
 const jaro = Jaro({ weight: "400", subsets: ["latin"], variable: "--font-jaro" });

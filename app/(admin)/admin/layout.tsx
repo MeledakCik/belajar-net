@@ -9,8 +9,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [authorized, setAuthorized] = useState(false);
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
-  
-  // WAJIB: Pakai NEXT_PUBLIC agar bisa dibaca browser
   const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL;
   const AUTH_ID = process.env.NEXT_PUBLIC_DEVICE_ID;
 
@@ -27,13 +25,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       const debugInfoGl = gl?.getExtension("WEBGL_debug_renderer_info");
       const renderer = debugInfoGl ? gl.getParameter(debugInfoGl.UNMASKED_RENDERER_WEBGL) : "";
       const cpuThreads = navigator.hardwareConcurrency;
-
-      // Filter hardware (Sederhanakan dikit biar gak mental)
       const isHardwareMatch = 
         renderer.toLowerCase().includes("radeon") && 
-        cpuThreads >= 8; // Laptop kamu biasanya terdeteksi 8 atau 12 threads
-
-      // Ambil Email dari Session
+        cpuThreads >= 8; 
       const session = localStorage.getItem("user_session");
       let userEmail = "";
       try {

@@ -106,7 +106,6 @@ export default function AboutWithNavbar() {
           </div>
 
           <div className="p-8 md:p-20 flex flex-col lg:flex-row items-center gap-12 relative z-10 flex-grow">
-            {/* Container Gambar Maskot */}
             <div className="hidden lg:flex w-full lg:w-1/3 justify-center order-2 lg:order-1">
               <div className="relative w-48 h-48 md:w-64 md:h-64">
                 <Image

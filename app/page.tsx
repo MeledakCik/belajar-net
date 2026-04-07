@@ -25,9 +25,7 @@ export default function Home() {
     item.desc.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
-  // Variabel bantuan untuk cek apakah sedang mencari atau tidak
   const isSearching = searchQuery.length > 0;
-
   return (
     <main className="min-h-screen bg-[#111827] text-white scroll-smooth">
       <Navbar onSearchChange={setSearchQuery} />
