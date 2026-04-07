@@ -39,10 +39,11 @@ export default function Footer({ onCategoryClick }: { onCategoryClick: (val: str
           </div>
           <div>
             <h3 className="text-lg font-[family-name:var(--font-jaro)] tracking-widest mb-6 text-white uppercase">Company</h3>
-            <ul className="space-y-3">
+            <ul className="grid grid-cols-2 gap-y-3 gap-x-4">
               <li><a href="#" className="text-gray-400 hover:text-white transition font-[family-name:var(--font-jaro)] text-sm uppercase">Help</a></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition font-[family-name:var(--font-jaro)] text-sm uppercase">Faq</a></li>
               <li><a href="#" className="text-gray-400 hover:text-white transition font-[family-name:var(--font-jaro)] text-sm uppercase">Blog</a></li>
+              <li><a href="/tentang" className="text-gray-400 hover:text-white transition font-[family-name:var(--font-jaro)] text-sm uppercase">About</a></li>
             </ul>
           </div>
           <div>
