@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     images: [
       {
         
-        url: "/image/logo.png",
+        url: "https://www.belajarnet.biz.id/image/logo.png",
         width: 1200,
         height: 630,
         alt: "Preview Belajar Net",

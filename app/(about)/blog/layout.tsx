@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     siteName: 'Belajar Net',
     images: [
       {
-        url: '/image/logo.png',
+        url: "https://www.belajarnet.biz.id/image/logo.png",
         width: 1200,
         height: 630,
         alt: 'Belajar Net Preview',
