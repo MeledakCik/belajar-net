@@ -87,8 +87,6 @@ export default function HelpSection() {
 
   return (
     <section className="font-[family-name:var(--font-poppins)] bg-[#0B0F1A] min-h-screen text-white p-6 md:p-12 flex flex-col items-center">
-      
-      {/* Header - Responsif: Lebar penuh di desktop */}
       <div className="w-full max-w-6xl mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shadow-lg">
@@ -99,8 +97,6 @@ export default function HelpSection() {
             <p className="text-gray-500 text-[9px] font-bold uppercase tracking-[0.3em]">Guide & Dokumentasi Belajar Net</p>
           </div>
         </div>
-
-        {/* Search Bar - Melebar di Desktop */}
         <div className="relative w-full md:w-96 group">
           <Icon icon="fluent:search-24-filled" className={`absolute left-4 top-1/2 -translate-y-1/2 transition-colors ${searchQuery ? 'text-blue-500' : 'text-gray-600'}`} />
           <input 
@@ -112,11 +108,7 @@ export default function HelpSection() {
           />
         </div>
       </div>
-
-      {/* Main Content Layout */}
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
-        {/* Sidebar Navigation - Hanya muncul di Desktop */}
         <div className="hidden lg:flex lg:col-span-4 flex-col gap-2 bg-[#161B29]/40 p-4 rounded-[24px] border border-gray-800">
           <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest p-4">Kategori Bantuan</p>
           {Object.entries(helpContent).map(([key, value]) => (
@@ -134,8 +126,6 @@ export default function HelpSection() {
             </button>
           ))}
         </div>
-
-        {/* Main Card - Otomatis Terisi */}
         <div className="lg:col-span-8 w-full bg-[#161B29]/60 border border-gray-800 rounded-[32px] p-8 md:p-12 relative overflow-hidden shadow-2xl backdrop-blur-md min-h-[500px]">
           {currentData ? (
             <div className="relative z-10 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -176,8 +166,6 @@ export default function HelpSection() {
               <p className="text-gray-600 font-bold text-xs uppercase tracking-widest">Pencarian tidak ditemukan</p>
             </div>
           )}
-
-          {/* Large Decorative Icon */}
           {currentData && (
             <Icon 
               icon={currentData.icon} 
@@ -186,8 +174,6 @@ export default function HelpSection() {
           )}
         </div>
       </div>
-
-      {/* Footer - Responsif */}
       <div className="w-full max-w-6xl mt-12 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-gray-900 pt-10">
          <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-xl bg-[#161B29] border border-gray-800 flex items-center justify-center font-black text-xs text-blue-500">BN</div>
