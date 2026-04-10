@@ -69,7 +69,7 @@ export default function AuthModal({
 
     setIsVerifying(true);
     const endpoint = mode === "login" ? "/login" : "/register";
-    const BASE_URL = "https://belajar-net-backend.vercel.app";
+    const BASE_URL = "https://www.belajar-net-backend.web.id/";
     try {
       const response = await fetch(`${BASE_URL}${endpoint}`, {
         method: "POST",
