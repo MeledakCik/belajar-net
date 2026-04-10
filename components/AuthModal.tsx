@@ -68,26 +68,26 @@ export default function AuthModal({
     }
 
     setIsVerifying(true);
-    const endpoint = mode === "login" ? "/login" : "/register";
-    const BASE_URL = "https://www.belajar-net-backend.web.id/";
     try {
-      const response = await fetch(`${BASE_URL}${endpoint}`, {
+      const response = await fetch("/api/auth", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          mode: mode,
           full_name: formData.fullName,
           email: formData.email,
           username: formData.username,
           password: formData.password,
         }),
       });
+
       const data = await response.json();
 
       if (response.ok) {
         toast.success(
           mode === "login" ? "Login Berhasil!" : "Registrasi Berhasil!",
           {
-            description: `Selamat datang di Belajar Net, ${formData.username || "User"}!`,
+            description: `Selamat datang, ${formData.username}!`,
             icon: <CheckCircle2 className="h-5 w-5 text-green-500" />,
           },
         );
@@ -97,24 +97,25 @@ export default function AuthModal({
           router.push("/dashboard");
         }, 1500);
       } else {
-        const errorMsg = data.error.toLowerCase();
+        // Tangani error dari backend (misal: "Username sudah ada")
         toast.error("Gagal " + (mode === "login" ? "Login" : "Daftar"), {
-          description: data.error,
+          description: data.error || "Terjadi kesalahan",
           icon: <AlertCircle className="h-5 w-5 text-red-500" />,
         });
 
-        if (errorMsg.includes("email")) setErrors({ email: data.error });
-        else if (
-          errorMsg.includes("username") ||
-          errorMsg.includes("tidak ditemukan")
-        )
-          setErrors({ username: data.error });
-        else if (errorMsg.includes("password"))
-          setErrors({ password: data.error });
+        // Map error ke state jika perlu
+        if (data.error) {
+          const errorMsg = data.error.toLowerCase();
+          if (errorMsg.includes("email")) setErrors({ email: data.error });
+          else if (errorMsg.includes("username"))
+            setErrors({ username: data.error });
+          else if (errorMsg.includes("password"))
+            setErrors({ password: data.error });
+        }
       }
     } catch (error) {
       toast.error("Server Error", {
-        description: "Gagal terhubung ke backend server.",
+        description: "Gagal terhubung ke API lokal.",
       });
     } finally {
       setIsVerifying(false);
