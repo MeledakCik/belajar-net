@@ -84,6 +84,17 @@ export default function AuthModal({
       const data = await response.json();
 
       if (response.ok) {
+        const encodedUsername = btoa(formData.username);
+        const sessionData = {
+          username: formData.username,
+          displayId: encodedUsername, // ID yang sudah disamarkan
+          email: formData.email,
+          role: "user",
+          loginAt: new Date().toISOString(),
+          isLoggedIn: true,
+        };
+        localStorage.setItem("userLoginData", JSON.stringify(sessionData));
+
         toast.success(
           mode === "login" ? "Login Berhasil!" : "Registrasi Berhasil!",
           {
@@ -91,19 +102,16 @@ export default function AuthModal({
             icon: <CheckCircle2 className="h-5 w-5 text-green-500" />,
           },
         );
-
         setTimeout(() => {
           onClose();
-          router.push("/dashboard");
+          window.location.href = `/dashboard?view_state=active&id=${encodedUsername}`;
         }, 1500);
       } else {
-        // Tangani error dari backend (misal: "Username sudah ada")
         toast.error("Gagal " + (mode === "login" ? "Login" : "Daftar"), {
           description: data.error || "Terjadi kesalahan",
           icon: <AlertCircle className="h-5 w-5 text-red-500" />,
         });
 
-        // Map error ke state jika perlu
         if (data.error) {
           const errorMsg = data.error.toLowerCase();
           if (errorMsg.includes("email")) setErrors({ email: data.error });
@@ -148,9 +156,7 @@ export default function AuthModal({
                 <X size={20} />
               </button>
               <h1 className="text-xl sm:text-2xl font-bold tracking-tight uppercase text-center mb-6">
-                {mode === "login"
-                  ? "Login Belajar Net"
-                  : "Register Belajar Net"}
+                {mode === "login" ? "Login" : "Register"} Belajar Net
               </h1>
               <div className="flex w-full overflow-hidden rounded-xl bg-[#161e2d] p-1 shadow-inner">
                 <button
@@ -187,7 +193,7 @@ export default function AuthModal({
                           name="fullName"
                           value={formData.fullName}
                           onChange={handleChange}
-                          placeholder="Your full name"
+                          placeholder="Nama lengkap"
                           className={`border-none bg-[#161e2d] pl-12 py-6 rounded-xl text-sm focus-visible:ring-1 ${errors.fullName ? "ring-1 ring-red-500" : "focus-visible:ring-blue-500"}`}
                         />
                       </div>
@@ -200,7 +206,7 @@ export default function AuthModal({
 
                     <div className="space-y-1.5">
                       <Label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">
-                        Email Address
+                        Email
                       </Label>
                       <div className="relative">
                         <Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" />
@@ -232,7 +238,7 @@ export default function AuthModal({
                       name="username"
                       value={formData.username}
                       onChange={handleChange}
-                      placeholder="Type your username"
+                      placeholder="Username"
                       className={`border-none bg-[#161e2d] pl-12 py-6 rounded-xl text-sm focus-visible:ring-1 ${errors.username ? "ring-1 ring-red-500" : "focus-visible:ring-blue-500"}`}
                     />
                   </div>
@@ -278,9 +284,9 @@ export default function AuthModal({
                     disabled={isVerifying}
                     className="w-full py-6 bg-white text-black hover:bg-gray-200 rounded-xl font-bold uppercase tracking-widest transition-all active:scale-95 flex items-center justify-center gap-2"
                   >
-                    {isVerifying && (
+                    {isVerifying ? (
                       <Loader2 className="h-4 w-4 animate-spin" />
-                    )}
+                    ) : null}
                     {isVerifying
                       ? "Processing..."
                       : mode === "login"
@@ -316,9 +322,6 @@ export default function AuthModal({
           .custom-scrollbar::-webkit-scrollbar-thumb {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
-          }
-          .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.2);
           }
         `}</style>
       </div>
