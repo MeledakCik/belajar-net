@@ -2,61 +2,38 @@ import { NextResponse } from "next/server";
 
 export async function PUT(
   request: Request,
-  { params }: { params: Promise<{ id: string }> } // Gunakan Promise untuk params
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = await params; // Wajib di-await di Next.js versi terbaru
+    const { id } = await params;
     const body = await request.json();
-
-    console.log(`Proxying PUT request for ID: ${id}`);
-
-    const BACKEND_URL = `https://www.belajar-net-backend.web.id/api/users/${id}`;
-
-    const response = await fetch(BACKEND_URL, {
+    const decodedString = atob(body.p); 
+    const originalData = JSON.parse(decodedString);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${id}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(originalData),
     });
 
     const data = await response.json();
-    
-    if (!response.ok) {
-        console.error("Backend responded with error:", data);
-        return NextResponse.json(data, { status: response.status });
-    }
-
-    return NextResponse.json(data, { status: 200 });
-  } catch (error: any) {
-    console.error("Proxy Error Details:", error);
-    return NextResponse.json({ error: "Proxy Update Error", details: error.message }, { status: 500 });
+    return NextResponse.json(data);
+  } catch (error) {
+    return NextResponse.json({ error: "Data Breach Protected" }, { status: 400 });
   }
 }
-
 export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } = await params;
-    const BACKEND_URL = `https://www.belajar-net-backend.web.id/api/users/${id}`;
-
-    const response = await fetch(BACKEND_URL, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${id}`, {
       method: "DELETE",
     });
-
     const data = await response.json();
-
-    if (!response.ok) {
-      return NextResponse.json(data, { status: response.status });
-    }
-
-    return NextResponse.json(data, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json(
-      { error: "Proxy Delete Error", details: error.message },
-      { status: 500 }
-    );
+    return NextResponse.json(data);
+  } catch (error) {
+    return NextResponse.json({ error: "Delete Failed" }, { status: 500 });
   }
 }
+

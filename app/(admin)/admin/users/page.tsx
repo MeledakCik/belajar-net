@@ -8,7 +8,7 @@ import {
   Edit2,
   Trash2,
   Activity,
-  CheckCircle2, 
+  CheckCircle2,
   Loader2,
   ArrowLeft,
   X,
@@ -34,7 +34,6 @@ export default function AdminUserManagement() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // States Modals
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<number | null>(null);
@@ -68,21 +67,23 @@ export default function AdminUserManagement() {
   const handleAddUser = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch(
-        "https://www.belajar-net-backend.web.id/register",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newUser),
-        },
-      );
+      const encodedData = btoa(JSON.stringify(newUser));
+      const res = await fetch("/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ p: encodedData }),
+      });
+
       if (res.ok) {
         setIsAddModalOpen(false);
         setNewUser({ full_name: "", username: "", email: "", password: "" });
         fetchUsers();
+        toast.success("User baru berhasil diinjeksi ke sistem!");
+      } else {
+        toast.error("Gagal menambah user");
       }
     } catch (err) {
-      alert("Gagal menambah user");
+      toast.error("Koneksi proxy terputus");
     }
   };
 
@@ -91,45 +92,29 @@ export default function AdminUserManagement() {
     if (!currentUser) return;
 
     try {
-      const payload = {
+      const rawPayload = {
         full_name: currentUser.full_name,
         email: currentUser.email,
         username: currentUser.username,
       };
-
+      const encodedData = btoa(JSON.stringify(rawPayload));
       const res = await fetch(`/api/users/${currentUser.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({ p: encodedData }), // Di Network Tab cuma muncul {"p": "..."}
       });
-
-      const data = await res.json();
 
       if (res.ok) {
         setUsers(
           users.map((u) =>
-            u.id === currentUser.id ? { ...u, ...payload } : u,
+            u.id === currentUser.id ? { ...u, ...rawPayload } : u,
           ),
         );
-        const savedData = localStorage.getItem("userLoginData");
-        if (savedData) {
-          const loggedInUser = JSON.parse(savedData);
-          if (loggedInUser.username === currentUser.username) {
-            localStorage.setItem(
-              "userLoginData",
-              JSON.stringify({ ...loggedInUser, ...payload }),
-            );
-          }
-        }
-
         setIsEditModalOpen(false);
-        toast.success("Database berhasil disinkronkan!");
-      } else {
-        toast.error(data.error || "Gagal memperbarui database");
+        toast.success("Data berhasil disinkronkan!");
       }
     } catch (err) {
-      console.error("Fetch error:", err);
-      toast.error("Gagal terhubung ke proxy server.");
+      toast.error("Gagal sinkronisasi data.");
     }
   };
 
@@ -143,20 +128,16 @@ export default function AdminUserManagement() {
 
       if (res.ok) {
         setUsers(users.filter((u) => u.id !== deleteId));
-
-        toast.success("Entitas berhasil dimusnahkan dari database", {
+        toast.success("Entitas berhasil dimusnahkan!", {
           icon: <CheckCircle2 className="h-4 w-4 text-green-500" />,
         });
-
         setDeleteId(null);
         setIsEditModalOpen(false);
       } else {
-        const errorData = await res.json();
-        toast.error(errorData.error || "Gagal menghapus data");
+        toast.error("Gagal menghapus data");
       }
     } catch (err) {
-      toast.error("Terjadi kesalahan pada jaringan proxy");
-      console.error("Delete error:", err);
+      toast.error("Gagal terhubung ke proxy");
     }
   };
 

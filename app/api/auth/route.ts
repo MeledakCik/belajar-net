@@ -5,7 +5,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { mode, ...authData } = body;
 
-    const BACKEND_URL = "https://www.belajar-net-backend.web.id";
+    const BACKEND_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}`;
     const endpoint = mode === "login" ? "/login" : "/register";
 
     const response = await fetch(`${BACKEND_URL}${endpoint}`, {
