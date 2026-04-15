@@ -87,7 +87,9 @@ export default function AuthModal({
         const encodedUsername = btoa(formData.username);
         const sessionData = {
           username: formData.username,
-          displayId: encodedUsername, // ID yang sudah disamarkan
+          full_name:
+            data.user?.full_name || formData.fullName || formData.username,
+          displayId: encodedUsername,
           email: formData.email,
           role: "user",
           loginAt: new Date().toISOString(),

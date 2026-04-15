@@ -10,15 +10,8 @@ export async function POST(request: Request) {
 
     const response = await fetch(`${BACKEND_URL}${endpoint}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        full_name: authData.full_name,
-        email: authData.email,
-        username: authData.username,
-        password: authData.password,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(authData),
     });
 
     const data = await response.json();
