@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-
 export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -7,7 +6,10 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const decodedString = atob(body.p); 
+    if (!body.p) {
+      return NextResponse.json({ error: "Missing payload 'p'" }, { status: 400 });
+    }
+    const decodedString = Buffer.from(body.p, 'base64').toString('utf-8');
     const originalData = JSON.parse(decodedString);
     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${id}`, {
       method: "PUT",
@@ -16,11 +18,14 @@ export async function PUT(
     });
 
     const data = await response.json();
-    return NextResponse.json(data);
-  } catch (error) {
-    return NextResponse.json({ error: "Data Breach Protected" }, { status: 400 });
+    return NextResponse.json(data, { status: response.status });
+
+  } catch (error: any) {
+    console.error("Decode Error:", error.message);
+    return NextResponse.json({ error: "Invalid encoded format" }, { status: 400 });
   }
 }
+
 export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
