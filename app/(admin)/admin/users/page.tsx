@@ -97,11 +97,14 @@ export default function AdminUserManagement() {
         email: currentUser.email,
         username: currentUser.username,
       };
+
+      // Pastikan ini ter-encode dengan benar
       const encodedData = btoa(JSON.stringify(rawPayload));
+
       const res = await fetch(`/api/users/${currentUser.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ p: encodedData }), // Di Network Tab cuma muncul {"p": "..."}
+        body: JSON.stringify({ p: encodedData }),
       });
 
       if (res.ok) {
@@ -111,10 +114,16 @@ export default function AdminUserManagement() {
           ),
         );
         setIsEditModalOpen(false);
-        toast.success("Data berhasil disinkronkan!");
+        toast.success("Data Sinkron!");
+      } else {
+        const errRes = await res.json();
+        console.error("Server Error:", errRes);
+        toast.error(
+          "Gagal update (400): " + (errRes.error || "Cek format data"),
+        );
       }
     } catch (err) {
-      toast.error("Gagal sinkronisasi data.");
+      toast.error("Network Error");
     }
   };
 
