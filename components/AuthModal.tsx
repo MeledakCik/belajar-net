@@ -69,22 +69,24 @@ export default function AuthModal({
 
     setIsVerifying(true);
     try {
-      const response = await fetch("/api/auth", {
+      const _0x5f2a = atob("L2FwaS9hdXRo");
+      const rawData = {
+        mode: mode,
+        full_name: formData.fullName,
+        email: formData.email,
+        username: formData.username,
+        password: formData.password,
+      };
+      const securePayload = btoa(JSON.stringify(rawData));
+      const response = await fetch(_0x5f2a, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          mode: mode,
-          full_name: formData.fullName,
-          email: formData.email,
-          username: formData.username,
-          password: formData.password,
-        }),
+        body: JSON.stringify({ p: securePayload }),
       });
-
       const data = await response.json();
-
       if (response.ok) {
         const encodedUsername = btoa(formData.username);
+
         const sessionData = {
           username: formData.username,
           full_name:
@@ -95,14 +97,11 @@ export default function AuthModal({
           loginAt: new Date().toISOString(),
           isLoggedIn: true,
         };
+
         localStorage.setItem("userLoginData", JSON.stringify(sessionData));
 
         toast.success(
           mode === "login" ? "Login Berhasil!" : "Registrasi Berhasil!",
-          {
-            description: `Selamat datang, ${formData.username}!`,
-            icon: <CheckCircle2 className="h-5 w-5 text-green-500" />,
-          },
         );
         setTimeout(() => {
           onClose();
