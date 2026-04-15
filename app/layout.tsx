@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"; 
 import { Akaya_Kanadaka, Jaro, Cabin, Candal, Geist, Geist_Mono, Inria_Sans, Poppins } from "next/font/google";
 import "./globals.css";
+
 const jaro = Jaro({ weight: "400", subsets: ["latin"], variable: "--font-jaro" });
 const candal = Candal({ weight: "400", subsets: ["latin"], variable: "--font-candal" });
 const cabin = Cabin({ weight: "400", subsets: ["latin"], variable: "--font-cabin" });

@@ -7,7 +7,6 @@ import Image from "next/image"
 import Footer from "@/components/Footer"
 import { SiPython, SiNextdotjs, SiReact, SiJavascript, SiGo, SiTailwindcss } from "react-icons/si";
 import Jalur from '@/components/jalur/page'
-
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("")
 
