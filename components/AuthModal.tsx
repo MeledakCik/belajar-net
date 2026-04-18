@@ -78,12 +78,15 @@ export default function AuthModal({
         password: formData.password,
       };
       const securePayload = btoa(JSON.stringify(rawData));
+
       const response = await fetch(_0x5f2a, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ p: securePayload }),
       });
+
       const data = await response.json();
+
       if (response.ok) {
         const encodedUsername = btoa(formData.username);
 
@@ -101,7 +104,29 @@ export default function AuthModal({
         localStorage.setItem("userLoginData", JSON.stringify(sessionData));
 
         toast.success(
-          mode === "login" ? "Login Berhasil!" : "Registrasi Berhasil!",
+          mode === "login"
+            ? "Login Berhasil!"
+            : "Akun Berhasil Dibuat!",
+          {
+            duration: 4000,
+            position: "top-right",
+            icon: (
+              <div className="flex items-center justify-center w-6 h-6 rounded-full bg-green-500/20 border border-green-500/50 shadow-[0_0_10px_rgba(34,197,94,0.4)]">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-4 h-4 text-green-400"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            ),
+          },
         );
         setTimeout(() => {
           onClose();
@@ -137,13 +162,16 @@ export default function AuthModal({
         position="top-right"
         richColors
         closeButton
+        theme="dark"
         toastOptions={{
           style: {
-            background: "#111827",
+            background: "rgba(15, 23, 42, 0.9)", // Biru gelap transparan
+            backdropFilter: "blur(10px)",
             color: "#ffffff",
-            border: "1px solid rgba(255,255,255,0.1)",
+            border: "1px solid rgba(34, 197, 94, 0.2)", // Border hijau halus
+            borderRadius: "14px",
           },
-          className: "font-[family-name:var(--font-poppins)]",
+          
         }}
       />
       <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 transition-all animate-in fade-in duration-300 font-[family-name:var(--font-poppins)]">

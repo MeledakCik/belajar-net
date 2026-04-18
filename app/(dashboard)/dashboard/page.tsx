@@ -4,12 +4,37 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import AuthModal from "@/components/AuthModal";
-
+import {
+  SiPython,
+  SiNextdotjs,
+  SiFrontendmentor,
+  SiWebflow,
+  SiReact,
+  SiBackendless,
+} from "react-icons/si";
+import {
+  Instagram,
+  Globe,
+  Users,
+  MessageCircle,
+  MoreHorizontal,
+  School,
+  BrainCircuit,
+  BookOpen,
+  Gamepad2,
+  Code2,
+  Lightbulb,
+} from "lucide-react";
 export default function Dashboard() {
   const router = useRouter();
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
-
+  const [step, setStep] = useState(0);
+  const [selected, setSelected] = useState("");
+  const [selected2, setSelected2] = useState("");
+  const [selected3, setSelected3] = useState("");
+  const [selected4, setSelected4] = useState("");
+  const [selectedJalur, setSelectedJalur] = useState("");
   useEffect(() => {
     const savedUser = localStorage.getItem("userLoginData");
     if (!savedUser) {
@@ -41,6 +66,465 @@ export default function Dashboard() {
     localStorage.removeItem("userLoginData");
     window.location.href = "/";
   };
+
+  const sources = [
+    {
+      id: "teman",
+      label: "Teman",
+      icon: <Users className="w-5 h-5 text-purple-400" />,
+    },
+    {
+      id: "instagram",
+      label: "Instagram",
+      icon: <Instagram className="w-5 h-5 text-pink-500" />,
+    },
+    {
+      id: "google",
+      label: "Google",
+      icon: <Globe className="w-5 h-5 text-blue-400" />,
+    },
+    {
+      id: "tiktok",
+      label: "TikTok",
+      icon: <MessageCircle className="w-5 h-5 text-cyan-400" />,
+    },
+    {
+      id: "lainnya",
+      label: "Lainnya",
+      icon: <MoreHorizontal className="w-5 h-5 text-gray-400" />,
+    },
+  ];
+  const sources2 = [
+    {
+      id: "python",
+      label: "PYTHON",
+      icon: <SiPython className="w-5 h-5 text-purple-400" />,
+    },
+    {
+      id: "webdev",
+      label: "WEB DEVELOPMENT",
+      icon: <SiWebflow className="w-5 h-5 text-pink-500" />,
+    },
+    {
+      id: "nextjs",
+      label: "NEXT JS",
+      icon: <SiNextdotjs className="w-5 h-5 text-blue-400" />,
+    },
+    {
+      id: "react",
+      label: "REACT",
+      icon: <SiReact className="w-5 h-5 text-cyan-400" />,
+    },
+    {
+      id: "fe",
+      label: "FRONT END",
+      icon: <SiFrontendmentor className="w-5 h-5 text-gray-400" />,
+    },
+    {
+      id: "be",
+      label: "BACK END",
+      icon: <SiBackendless className="w-5 h-5 text-gray-400" />,
+    },
+  ];
+  const reasons = [
+    {
+      id: "kreatif",
+      label: "Mengasah Ide Kreatif",
+      icon: <Lightbulb className="text-yellow-400" />,
+    },
+    {
+      id: "project",
+      label: "Membuat Project Sendiri",
+      icon: <Code2 className="text-purple-400" />,
+    },
+    {
+      id: "hobi",
+      label: "Hobi atau Penasaran",
+      icon: <Gamepad2 className="text-emerald-400" />,
+    },
+    {
+      id: "baru",
+      label: "Belajar Hal Baru",
+      icon: <BookOpen className="text-blue-400" />,
+    },
+    {
+      id: "logika",
+      label: "Melatih Logika",
+      icon: <BrainCircuit className="text-pink-400" />,
+    },
+    {
+      id: "pendidikan",
+      label: "Mendukung Pendidikan",
+      icon: <School className="text-orange-400" />,
+    },
+  ];
+  if (step === 1) {
+    return (
+      <main className="h-screen w-full bg-[#0F172A] text-white flex flex-col items-center justify-start sm:justify-center p-4 sm:p-6 font-[family-name:var(--font-poppins)] overflow-x-hidden overflow-y-auto">
+        <div className="w-full max-w-3xl flex flex-col items-center py-8 sm:py-0">
+          <div className="relative mb-14 sm:mb-16 flex grid grid-cols-2 justify-center items-center shrink-0">
+            <div className="absolute left-[65%] sm:left-[75%] -top-6 sm:-top-10 bg-[#1E293B]/90 backdrop-blur-sm px-4 py-2 rounded-2xl border border-slate-700 text-[10px] sm:text-xs w-36 sm:w-48 text-center shadow-2xl z-30 animate-bounce-slow">
+              Darimana kamu mengetahui Belajar Net?
+              <div className="absolute bottom-[-6px] left-[15%] w-3 h-3 bg-[#1E293B] rotate-45 border-r border-b border-slate-700"></div>
+            </div>
+            <div className="relative w-24 h-[100px] sm:w-44 sm:h-[200px] animate-robot-float flex items-center justify-center transition-all duration-500 scale-90 sm:scale-100">
+              <div className="absolute -top-3 sm:-top-[25px] left-1/2 -translate-x-1/2 flex flex-col items-center z-10">
+                <div className="w-2.5 h-2.5 sm:w-6 sm:h-6 bg-[#00C9A7] rounded-full border-2 sm:border-4 border-[#121921] shadow-[0_0_15px_#00C9A7]"></div>
+                <div className="w-0.5 h-2.5 sm:w-2 sm:h-8 bg-[#121921] rounded-full"></div>
+              </div>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-16 sm:w-40 sm:h-32 bg-[#E0F2FE] rounded-[18px] sm:rounded-[35px] border-[4px] sm:border-[8px] border-[#121921] shadow-2xl z-20 flex flex-col items-center justify-center">
+                <div className="flex space-x-2 sm:space-x-6">
+                  <div className="w-2.5 h-2.5 sm:w-6 sm:h-6 bg-[#00C9A7] rounded-full border-[2px] sm:border-[3px] border-[#121921] shadow-[0_0_10px_#00C9A7]"></div>
+                  <div className="w-2.5 h-2.5 sm:w-6 sm:h-6 bg-[#00C9A7] rounded-full border-[2px] sm:border-[3px] border-[#121921] shadow-[0_0_10px_#00C9A7]"></div>
+                </div>
+                <div className="mt-1 sm:mt-3 w-4 sm:w-10 h-1.5 sm:h-4 border-b-[2px] sm:border-b-[5px] border-[#121921] rounded-full"></div>
+              </div>
+              <div className="absolute top-[55px] sm:top-[110px] left-1/2 -translate-x-1/2 w-16 h-14 sm:w-36 sm:h-28 bg-[#1F2937] rounded-[10px] sm:rounded-[25px] border-[3px] sm:border-[6px] border-[#121921] shadow-xl z-10 flex items-center justify-center">
+                <div className="w-8 h-5 sm:w-20 sm:h-12 bg-[#111827] rounded-md sm:rounded-lg border-2 sm:border-4 border-[#121921] flex items-center justify-center">
+                  <span className="text-[#00C9A7] font-mono font-bold text-[8px] sm:text-xl tracking-tighter">
+                    {"</>"}
+                  </span>
+                </div>
+              </div>
+              <div className="absolute top-[65px] sm:top-[130px] left-[-2px] sm:left-[-10px] w-2.5 h-8 sm:w-6 sm:h-20 bg-[#1F2937] border-[2px] sm:border-[6px] border-[#121921] rounded-full origin-top -rotate-[20deg] z-0"></div>
+              <div className="absolute top-[65px] sm:top-[130px] right-[-2px] sm:right-[-10px] w-2.5 h-8 sm:w-6 sm:h-20 bg-[#1F2937] border-[2px] sm:border-[6px] border-[#121921] rounded-full origin-top rotate-[20deg] z-0"></div>
+            </div>
+          </div>
+          <div className="w-full grid grid-cols-2 gap-3 sm:gap-5 shrink-0">
+            {sources.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setSelected(item.id)}
+                className={`w-full flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 transition-all duration-300 ${
+                  selected === item.id
+                    ? "border-emerald-500 bg-emerald-500/10 shadow-[0_0_20px_rgba(16,185,129,0.1)]"
+                    : "border-slate-800 bg-[#1E293B]/40 hover:border-slate-600"
+                }`}
+              >
+                <div
+                  className={`p-2 sm:p-2 rounded-lg sm:rounded-xl ${selected === item.id ? "bg-emerald-500/20" : "bg-slate-800"}`}
+                >
+                  {item.icon}
+                </div>
+                <span
+                  className={`font-semibold text-2xl sm:text-base ${selected === item.id ? "text-emerald-400" : "text-slate-200"}`}
+                >
+                  {item.label}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div className="w-full mt-6 sm:mt-10 flex items-center justify-between shrink-0">
+            <div className="flex items-center space-x-4 sm:space-x-8">
+              <div className="hidden sm:block h-1.5 w-24 bg-slate-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-blue-600 transition-all duration-700 ease-out"
+                  style={{ width: "10%" }}
+                ></div>
+              </div>
+              <button
+                onClick={() => {
+                  setStep(0);
+                  setSelected("");
+                }}
+                className="text-slate-500 hover:text-white font-bold text-[10px] sm:text-sm tracking-widest uppercase transition-colors"
+              >
+                Kembali
+              </button>
+            </div>
+            <div className="flex items-center justify-between w-full sm:w-auto space-x-4 sm:space-x-8">
+              <button
+                onClick={() => setStep(2)}
+                className="text-slate-400 hover:text-white font-bold text-[10px] sm:text-sm tracking-widest uppercase transition-colors"
+              >
+                Lewati
+              </button>
+              <button
+                onClick={() => selected && setStep(2)}
+                disabled={!selected}
+                className={`px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-[10px] sm:text-sm uppercase tracking-widest transition-all duration-300 ${
+                  selected
+                    ? "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/40 active:scale-95"
+                    : "bg-slate-800 text-slate-500 cursor-not-allowed"
+                }`}
+              >
+                Lanjutkan
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <style jsx global>{`
+          @keyframes robot-float {
+            0%,
+            100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-12px);
+            }
+          }
+          @keyframes bounce-slow {
+            0%,
+            100% {
+              transform: translate(-50%, 0);
+            }
+            50% {
+              transform: translate(-50%, -4px);
+            }
+          }
+        `}</style>
+      </main>
+    );
+  }
+  if (step === 2) {
+    return (
+      <main className="h-screen w-full bg-[#0F172A] text-white flex flex-col items-center justify-start sm:justify-center p-4 sm:p-6 font-[family-name:var(--font-poppins)] overflow-x-hidden overflow-y-auto">
+        <div className="w-full max-w-3xl flex flex-col items-center py-8 sm:py-0">
+          <div className="relative mb-14 sm:mb-16 flex grid grid-cols-2 justify-center items-center shrink-0">
+            <div className="absolute left-[65%] sm:left-[75%] -top-6 sm:-top-10 bg-[#1E293B]/90 backdrop-blur-sm px-4 py-2 rounded-2xl border border-slate-700 text-[10px] sm:text-xs w-36 sm:w-48 text-center shadow-2xl z-30 animate-bounce-slow">
+              Apa yang ingin kamu pelajari?
+              <div className="absolute bottom-[-6px] left-[15%] w-3 h-3 bg-[#1E293B] rotate-45 border-r border-b border-slate-700"></div>
+            </div>
+            <div className="relative w-24 h-[100px] sm:w-44 sm:h-[200px] animate-robot-float flex items-center justify-center transition-all duration-500 scale-90 sm:scale-100">
+              <div className="absolute -top-3 sm:-top-[25px] left-1/2 -translate-x-1/2 flex flex-col items-center z-10">
+                <div className="w-2.5 h-2.5 sm:w-6 sm:h-6 bg-[#00C9A7] rounded-full border-2 sm:border-4 border-[#121921] shadow-[0_0_15px_#00C9A7]"></div>
+                <div className="w-0.5 h-2.5 sm:w-2 sm:h-8 bg-[#121921] rounded-full"></div>
+              </div>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-16 sm:w-40 sm:h-32 bg-[#E0F2FE] rounded-[18px] sm:rounded-[35px] border-[4px] sm:border-[8px] border-[#121921] shadow-2xl z-20 flex flex-col items-center justify-center">
+                <div className="flex space-x-2 sm:space-x-6">
+                  <div className="w-2.5 h-2.5 sm:w-6 sm:h-6 bg-[#00C9A7] rounded-full border-[2px] sm:border-[3px] border-[#121921] shadow-[0_0_10px_#00C9A7]"></div>
+                  <div className="w-2.5 h-2.5 sm:w-6 sm:h-6 bg-[#00C9A7] rounded-full border-[2px] sm:border-[3px] border-[#121921] shadow-[0_0_10px_#00C9A7]"></div>
+                </div>
+                <div className="mt-1 sm:mt-3 w-4 sm:w-10 h-1.5 sm:h-4 border-b-[2px] sm:border-b-[5px] border-[#121921] rounded-full"></div>
+              </div>
+              <div className="absolute top-[55px] sm:top-[110px] left-1/2 -translate-x-1/2 w-16 h-14 sm:w-36 sm:h-28 bg-[#1F2937] rounded-[10px] sm:rounded-[25px] border-[3px] sm:border-[6px] border-[#121921] shadow-xl z-10 flex items-center justify-center">
+                <div className="w-8 h-5 sm:w-20 sm:h-12 bg-[#111827] rounded-md sm:rounded-lg border-2 sm:border-4 border-[#121921] flex items-center justify-center">
+                  <span className="text-[#00C9A7] font-mono font-bold text-[8px] sm:text-xl tracking-tighter">
+                    {"</>"}
+                  </span>
+                </div>
+              </div>
+              <div className="absolute top-[65px] sm:top-[130px] left-[-2px] sm:left-[-10px] w-2.5 h-8 sm:w-6 sm:h-20 bg-[#1F2937] border-[2px] sm:border-[6px] border-[#121921] rounded-full origin-top -rotate-[20deg] z-0"></div>
+              <div className="absolute top-[65px] sm:top-[130px] right-[-2px] sm:right-[-10px] w-2.5 h-8 sm:w-6 sm:h-20 bg-[#1F2937] border-[2px] sm:border-[6px] border-[#121921] rounded-full origin-top rotate-[20deg] z-0"></div>
+            </div>
+          </div>
+          <div className="w-full grid grid-cols-2 gap-3 sm:gap-5 shrink-0">
+            {sources2.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setSelected2(item.id)}
+                className={`w-full flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 transition-all duration-300 ${
+                  selected2 === item.id
+                    ? "border-emerald-500 bg-emerald-500/10 shadow-[0_0_20px_rgba(16,185,129,0.1)]"
+                    : "border-slate-800 bg-[#1E293B]/40 hover:border-slate-600"
+                }`}
+              >
+                <div
+                  className={`p-2 sm:p-2 rounded-lg sm:rounded-xl ${selected2 === item.id ? "bg-emerald-500/20" : "bg-slate-800"}`}
+                >
+                  {item.icon}
+                </div>
+                <span
+                  className={`font-semibold text-2xl sm:text-base ${selected2 === item.id ? "text-emerald-400" : "text-slate-200"}`}
+                >
+                  {item.label}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div className="w-full mt-6 sm:mt-10 flex items-center justify-between shrink-0">
+            <div className="flex items-center space-x-4 sm:space-x-8">
+              <div className="hidden sm:block h-1.5 w-24 bg-slate-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-blue-600 transition-all duration-700 ease-out"
+                  style={{ width: "40%" }}
+                ></div>
+              </div>
+              <button
+                onClick={() => {
+                  setStep(1);
+                  setSelected2("");
+                }}
+                className="text-slate-500 hover:text-white font-bold text-[10px] sm:text-sm tracking-widest uppercase transition-colors"
+              >
+                Kembali
+              </button>
+            </div>
+            <div className="flex items-center justify-between w-full sm:w-auto space-x-4 sm:space-x-8">
+              <button
+                onClick={() => {
+                  if (selected2) {
+                    const jalur = sources2.find(
+                      (s) => s.id === selected,
+                    )?.label;
+                    setSelectedJalur(jalur || "");
+                    setStep(3);
+                    setSelected2("");
+                  }
+                }}
+                disabled={!selected2}
+                className={`px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl font-bold text-[10px] sm:text-sm uppercase tracking-widest transition-all duration-300 ${
+                  selected2
+                    ? "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-900/40 active:scale-95"
+                    : "bg-slate-800 text-slate-500 cursor-not-allowed"
+                }`}
+              >
+                Lanjutkan
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <style jsx global>{`
+          @keyframes robot-float {
+            0%,
+            100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-12px);
+            }
+          }
+          @keyframes bounce-slow {
+            0%,
+            100% {
+              transform: translate(-50%, 0);
+            }
+            50% {
+              transform: translate(-50%, -4px);
+            }
+          }
+        `}</style>
+      </main>
+    );
+  }
+  if (step === 3) {
+    return (
+      <main className="h-screen w-full bg-[#0F172A] text-white flex flex-col items-center justify-start sm:justify-center p-4 sm:p-6 font-[family-name:var(--font-poppins)] overflow-x-hidden overflow-y-auto">
+        <div className="w-full max-w-3xl flex flex-col items-center py-8 sm:py-0">
+          <div className="relative mb-14 sm:mb-16 flex grid grid-cols-2 justify-center items-center shrink-0">
+            <div className="absolute left-[65%] sm:left-[75%] -top-6 sm:-top-10 bg-[#1E293B]/90 backdrop-blur-sm px-4 py-2 rounded-2xl border border-slate-700 text-[10px] sm:text-xs w-36 sm:w-48 text-center shadow-2xl z-30 animate-bounce-slow">
+              Kenapa kamu ingin belajar{" "}
+              <span className="text-emerald-400 font-bold gap-2">
+                {selectedJalur}
+              </span>{" "}
+              ?
+              <div className="absolute bottom-[-6px] left-[15%] w-3 h-3 bg-[#1E293B] rotate-45 border-r border-b border-slate-700"></div>
+            </div>
+            <div className="relative w-24 h-[100px] sm:w-44 sm:h-[200px] animate-robot-float flex items-center justify-center transition-all duration-500 scale-90 sm:scale-100">
+              <div className="absolute -top-3 sm:-top-[25px] left-1/2 -translate-x-1/2 flex flex-col items-center z-10">
+                <div className="w-2.5 h-2.5 sm:w-6 sm:h-6 bg-[#00C9A7] rounded-full border-2 sm:border-4 border-[#121921] shadow-[0_0_15px_#00C9A7]"></div>
+                <div className="w-0.5 h-2.5 sm:w-2 sm:h-8 bg-[#121921] rounded-full"></div>
+              </div>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-16 sm:w-40 sm:h-32 bg-[#E0F2FE] rounded-[18px] sm:rounded-[35px] border-[4px] sm:border-[8px] border-[#121921] shadow-2xl z-20 flex flex-col items-center justify-center">
+                <div className="flex space-x-2 sm:space-x-6">
+                  <div className="w-2.5 h-2.5 sm:w-6 sm:h-6 bg-[#00C9A7] rounded-full border-[2px] sm:border-[3px] border-[#121921] shadow-[0_0_10px_#00C9A7]"></div>
+                  <div className="w-2.5 h-2.5 sm:w-6 sm:h-6 bg-[#00C9A7] rounded-full border-[2px] sm:border-[3px] border-[#121921] shadow-[0_0_10px_#00C9A7]"></div>
+                </div>
+                <div className="mt-1 sm:mt-3 w-4 sm:w-10 h-1.5 sm:h-4 border-b-[2px] sm:border-b-[5px] border-[#121921] rounded-full"></div>
+              </div>
+              <div className="absolute top-[55px] sm:top-[110px] left-1/2 -translate-x-1/2 w-16 h-14 sm:w-36 sm:h-28 bg-[#1F2937] rounded-[10px] sm:rounded-[25px] border-[3px] sm:border-[6px] border-[#121921] shadow-xl z-10 flex items-center justify-center">
+                <div className="w-8 h-5 sm:w-20 sm:h-12 bg-[#111827] rounded-md sm:rounded-lg border-2 sm:border-4 border-[#121921] flex items-center justify-center">
+                  <span className="text-[#00C9A7] font-mono font-bold text-[8px] sm:text-xl tracking-tighter">
+                    {"</>"}
+                  </span>
+                </div>
+              </div>
+              <div className="absolute top-[65px] sm:top-[130px] left-[-2px] sm:left-[-10px] w-2.5 h-8 sm:w-6 sm:h-20 bg-[#1F2937] border-[2px] sm:border-[6px] border-[#121921] rounded-full origin-top -rotate-[20deg] z-0"></div>
+              <div className="absolute top-[65px] sm:top-[130px] right-[-2px] sm:right-[-10px] w-2.5 h-8 sm:w-6 sm:h-20 bg-[#1F2937] border-[2px] sm:border-[6px] border-[#121921] rounded-full origin-top rotate-[20deg] z-0"></div>
+            </div>
+          </div>
+          <div className="w-full grid grid-cols-2 gap-3 sm:gap-5 shrink-0">
+            {reasons.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => setSelected3(item.id)}
+                className={`w-full flex items-center space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl border-2 transition-all duration-300 ${
+                  selected3 === item.id
+                    ? "border-emerald-500 bg-emerald-500/10 shadow-[0_0_20px_rgba(16,185,129,0.1)]"
+                    : "border-slate-800 bg-[#1E293B]/40 hover:border-slate-600"
+                }`}
+              >
+                <div
+                  className={`p-2 sm:p-2 rounded-lg sm:rounded-xl ${selected3 === item.id ? "bg-emerald-500/20" : "bg-slate-800"}`}
+                >
+                  {item.icon}
+                </div>
+                <span
+                  className={`font-semibold text-2xl sm:text-base ${selected3 === item.id ? "text-emerald-400" : "text-slate-200"}`}
+                >
+                  {item.label}
+                </span>
+              </button>
+            ))}
+          </div>
+
+          <div className="w-full mt-6 sm:mt-10 flex items-center justify-between shrink-0">
+            <div className="flex items-center space-x-4 sm:space-x-8">
+              <div className="hidden sm:block h-1.5 w-24 bg-slate-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-blue-600 transition-all duration-700 ease-out"
+                  style={{ width: "60%" }}
+                ></div>
+              </div>
+              <button
+                onClick={() => {
+                  setStep(2);
+                  setSelected3("");
+                }}
+                className="text-slate-500 hover:text-white font-bold text-[10px] sm:text-sm tracking-widest uppercase transition-colors"
+              >
+                Kembali
+              </button>
+            </div>
+            <div className="flex items-center justify-between w-full sm:w-auto space-x-4 sm:space-x-8">
+              <button
+                onClick={() => setStep(4)}
+                className="text-slate-400 hover:text-white font-bold text-[10px] sm:text-sm tracking-widest uppercase transition-colors"
+              >
+                Lewati
+              </button>
+              <button
+                onClick={() => setStep(4)}
+                disabled={!selected3}
+                className={`px-8 py-3 rounded-2xl font-bold text-sm uppercase tracking-widest transition-all ${
+                  selected3
+                    ? "bg-blue-600 shadow-lg shadow-blue-900/40"
+                    : "bg-slate-800 text-slate-500"
+                }`}
+              >
+                Lanjutkan
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <style jsx global>{`
+          @keyframes robot-float {
+            0%,
+            100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-12px);
+            }
+          }
+          @keyframes bounce-slow {
+            0%,
+            100% {
+              transform: translate(-50%, 0);
+            }
+            50% {
+              transform: translate(-50%, -4px);
+            }
+          }
+        `}</style>
+      </main>
+    );
+  }
 
   return (
     <main className="h-screen w-full bg-[#0F172A] text-white flex flex-col items-center justify-center p-4 overflow-x-hidden overflow-y-auto font-[family-name:var(--font-poppins)]">
@@ -90,7 +574,10 @@ export default function Dashboard() {
           </p>
         </div>
         <div className="w-full max-w-[240px] xs:max-w-[280px] sm:max-w-xs animate-fade-in flex flex-col gap-2 sm:gap-4">
-          <Button className="w-full py-4 sm:py-7 bg-blue-600 hover:bg-blue-700 text-white rounded-xl sm:rounded-2xl font-bold uppercase tracking-widest text-xs sm:text-base transition-all active:scale-95 shadow-lg shadow-blue-900/20">
+          <Button
+            onClick={() => setStep(1)}
+            className="w-full py-4 sm:py-7 bg-blue-600 hover:bg-blue-700 text-white rounded-xl sm:rounded-2xl font-bold uppercase tracking-widest text-xs sm:text-base transition-all active:scale-95 shadow-lg shadow-blue-900/20"
+          >
             Mulai Belajar
           </Button>
 
