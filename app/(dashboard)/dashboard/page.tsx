@@ -160,7 +160,7 @@ export default function Dashboard() {
   ];
   if (step === 1) {
     return (
-      <main className="min-h-screen w-full bg-[#0F172A] text-white flex flex-col items-center justify-center p-4 sm:p-6 font-[family-name:var(--font-poppins)] overflow-x-hidden relative">
+      <main className="min-h-screen w-full bg-[#0F172A] text-white flex flex-col items-center justify-center p-10 sm:p-6 font-[family-name:var(--font-poppins)] overflow-x-hidden relative">
         <div className="w-full max-w-2xl flex flex-col items-center">
           <div className="relative mb-12 sm:mb-20 flex justify-center items-center shrink-0 group">
             <div className="absolute left-[60%] sm:left-[80%] -top-8 sm:-top-12 bg-slate-800/90 backdrop-blur-md px-5 py-3 rounded-2xl border border-slate-700 text-[11px] sm:text-xs w-40 sm:w-52 text-center shadow-2xl z-30">
@@ -263,7 +263,7 @@ export default function Dashboard() {
   }
   if (step === 2) {
     return (
-      <main className="min-h-screen w-full bg-[#0F172A] text-white flex flex-col items-center justify-center p-4 sm:p-6 font-[family-name:var(--font-poppins)] overflow-x-hidden relative">
+      <main className="min-h-screen w-full bg-[#0F172A] text-white flex flex-col items-center justify-center p-10 sm:p-6 font-[family-name:var(--font-poppins)] overflow-x-hidden relative">
         <div className="w-full max-w-2xl flex flex-col items-center">
           <div className="relative mb-12 sm:mb-20 flex justify-center items-center shrink-0 group">
             <div className="absolute left-[60%] sm:left-[80%] -top-8 sm:-top-12 bg-slate-800/90 backdrop-blur-md px-5 py-3 rounded-2xl border border-slate-700 text-[11px] sm:text-xs w-40 sm:w-52 text-center shadow-2xl z-30">
@@ -371,7 +371,7 @@ export default function Dashboard() {
   }
   if (step === 3) {
     return (
-      <main className="min-h-screen w-full bg-[#0F172A] text-white flex flex-col items-center justify-center p-4 sm:p-6 font-[family-name:var(--font-poppins)] overflow-x-hidden relative">
+      <main className="min-h-screen w-full bg-[#0F172A] text-white flex flex-col items-center justify-center p-10 sm:p-6 font-[family-name:var(--font-poppins)] overflow-x-hidden relative">
         <div className="w-full max-w-2xl flex flex-col items-center">
           <div className="relative mb-12 sm:mb-20 flex justify-center items-center shrink-0 group">
             <div className="absolute left-[60%] sm:left-[80%] -top-8 sm:-top-12 bg-slate-800/90 backdrop-blur-md px-5 py-3 rounded-2xl border border-slate-700 text-[11px] sm:text-xs w-40 sm:w-52 text-center shadow-2xl z-30">
@@ -433,7 +433,7 @@ export default function Dashboard() {
               </button>
             ))}
           </div>
-          <div className="w-full mt-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="w-full mt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="flex items-center space-x-6 w-full sm:w-auto">
               <div className="hidden block sm:block h-2 w-32 bg-slate-800 rounded-full">
                 <div
