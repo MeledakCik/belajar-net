@@ -433,7 +433,7 @@ export default function Dashboard() {
               </button>
             ))}
           </div>
-          <div className="w-full mt-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="w-full mt-6 sm:mt-12 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="flex items-center space-x-6 w-full sm:w-auto">
               <div className="hidden block sm:block h-2 w-32 bg-slate-800 rounded-full">
                 <div
