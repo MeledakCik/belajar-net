@@ -243,9 +243,9 @@ export default function Dashboard() {
     return (
       <main className="h-screen p-4 w-full bg-[#0F172A] text-white font-[family-name:var(--font-poppins)] overflow-x-hidden overflow-y-auto sm:overflow-y-hidden relative custom-scrollbar">
         <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-64 bg-blue-600/10 blur-[120px] -z-10 pointer-events-none"></div>
-        <div className="min-h-full w-full flex flex-col items-center justify-center p-6 sm:p-12 ">
+        <div className="min-h-full w-full flex flex-col items-center justify-center p-6 sm:p-10 ">
           <div className="w-full max-w-2xl flex flex-col items-center py-4">
-            <div className="relative mb-12 sm:mb-10 flex justify-center items-center shrink-0 group">
+            <div className="relative mb-12 sm:mb-13 flex justify-center items-center shrink-0 group">
               <div className="absolute left-[60%] sm:left-[80%] -top-8 sm:-top-12 bg-slate-800/90 backdrop-blur-md px-5 py-3 rounded-2xl border border-slate-700 text-[11px] sm:text-xs w-40 sm:w-52 text-center shadow-2xl z-30">
                 <span className="relative z-10 text-slate-100 font-medium">
                   Darimana kamu mengetahui{" "}
@@ -279,7 +279,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
               {sources.map((item) => (
                 <button
                   key={item.id}
@@ -564,7 +564,7 @@ export default function Dashboard() {
                 </button>
               ))}
             </div>
-            <div className="w-full mt-6 flex flex-col sm:flex-row items-center justify-between gap-6 pb-10">
+            <div className="w-full mt-4 flex flex-col sm:flex-row items-center justify-between gap-6 pb-10">
               <div className="flex items-center space-x-6 w-full sm:w-auto justify-center sm:justify-start">
                 <div className="hidden sm:block h-2 w-32 bg-slate-800 rounded-full overflow-hidden">
                   <div
@@ -694,7 +694,7 @@ export default function Dashboard() {
                   ></div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4 items-center space-x-3 w-full sm:w-auto">
+              <div className="flex items-center space-x-3 w-full sm:w-auto">
                 <button
                   onClick={() => {
                     setStep(3);
@@ -803,7 +803,7 @@ export default function Dashboard() {
                   ></div>
                 </div>
 
-                <div className="flex items-center gap-4 w-full sm:w-auto">
+                <div className="flex items-center space-x-3 w-full sm:w-auto">
                   <button
                     onClick={() => setStep(4)}
                     className="px-6 py-3 text-slate-500 hover:text-slate-200 text-sm font-bold uppercase tracking-widest transition-colors"
