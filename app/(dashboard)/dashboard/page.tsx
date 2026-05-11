@@ -812,11 +812,27 @@ export default function Dashboard() {
                   </button>
                   <button
                     onClick={() => {
-                      if (selected5) {
-                        console.log(
-                          "Mulai petualangan dengan paket:",
-                          selected5,
+                      if (selected5 === "pro") {
+                        setStep(6);
+                      } else {
+                        const params = new URLSearchParams(
+                          window.location.search,
                         );
+                        const urlId = params.get("id");
+                        const viewState = params.get("view_state");
+
+                        const loginData = {
+                          displayId: urlId,
+                          viewState: viewState,
+                          isLoggedIn: true,
+                          lastLogin: new Date().toISOString(),
+                        };
+
+                        localStorage.setItem(
+                          "userLoginData",
+                          JSON.stringify(loginData),
+                        );
+                        router.push(`/home`);
                       }
                     }}
                     disabled={!selected5}
@@ -853,6 +869,131 @@ export default function Dashboard() {
             background-color: #475569;
           }
         `}</style>
+      </main>
+    );
+  }
+  if (step === 6) {
+    return (
+      <main className="h-screen w-full bg-[#0F172A] text-white font-[family-name:var(--font-poppins)] overflow-hidden relative">
+        <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-64 bg-blue-600/10 blur-[120px] -z-10 pointer-events-none"></div>
+        <div className="h-full w-full flex flex-col overflow-y-auto custom-scrollbar p-6 sm:p-12">
+          <div className="max-w-4xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mt-8">
+            <div className="space-y-8">
+              <div>
+                <button
+                  onClick={() => setStep(5)}
+                  className="text-slate-400 hover:text-white flex items-center gap-2 mb-6 transition-colors"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                  Ganti Paket
+                </button>
+                <h2 className="text-3xl font-bold font-[family-name:var(--font-candal)]">
+                  Selesaikan <span className="text-blue-500">Pembayaran</span>
+                </h2>
+                <p className="text-slate-400 mt-2">
+                  Dapatkan akses penuh ke seluruh ekosistem Belajar Net.
+                </p>
+              </div>
+
+              <div className="bg-slate-900/50 border border-slate-800 rounded-3xl p-6 space-y-4">
+                <div className="flex justify-between items-center pb-4 border-b border-slate-800">
+                  <div>
+                    <p className="font-bold text-lg">Pro Plan (Bulanan)</p>
+                    <p className="text-xs text-slate-500 italic">
+                      Berlangganan otomatis, batalkan kapan saja.
+                    </p>
+                  </div>
+                  <p className="font-bold text-xl text-blue-400">Rp 49.000</p>
+                </div>
+
+                <div className="space-y-2 pt-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400">Subtotal</span>
+                    <span>Rp 49.000</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400">PPN (11%)</span>
+                    <span>Rp 5.390</span>
+                  </div>
+                  <div className="flex justify-between text-xl font-bold pt-4 text-white">
+                    <span>Total Bayar</span>
+                    <span>Rp 54.390</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl">
+                <div className="p-2 bg-emerald-500 rounded-lg">
+                  <svg
+                    className="w-5 h-5 text-[#0F172A]"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <p className="text-xs text-emerald-400 italic">
+                  Pembayaran aman & terenkripsi oleh sistem keamanan berlapis.
+                </p>
+              </div>
+            </div>
+            <div className="bg-slate-900/80 backdrop-blur-xl border border-blue-500/30 rounded-[40px] p-8 shadow-2xl">
+              <h3 className="text-lg font-bold mb-6">
+                Pilih Metode Pembayaran
+              </h3>
+
+              <div className="space-y-3 mb-8">
+                {["QRIS / E-Wallet", "Transfer Bank (VA)", "Kartu Kredit"].map(
+                  (method) => (
+                    <label
+                      key={method}
+                      className="flex items-center justify-between p-4 bg-slate-800/50 border border-slate-700 rounded-2xl cursor-pointer hover:border-blue-500 transition-all group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-4 h-4 border-2 border-slate-500 rounded-full group-hover:border-blue-500"></div>
+                        <span className="text-sm font-medium">{method}</span>
+                      </div>
+                      <div className="flex gap-1 opacity-50 group-hover:opacity-100 transition-opacity">
+                        <div className="w-6 h-4 bg-slate-600 rounded"></div>
+                        <div className="w-6 h-4 bg-slate-600 rounded"></div>
+                      </div>
+                    </label>
+                  ),
+                )}
+              </div>
+
+              <button
+                onClick={() =>
+                  alert("Menghubungkan ke Midtrans/Payment Gateway...")
+                }
+                className="w-full py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-sm uppercase tracking-widest shadow-[0_10px_20px_rgba(37,99,235,0.3)] active:scale-[0.98] transition-all"
+              >
+                Bayar Sekarang
+              </button>
+
+              <p className="text-center text-[10px] text-slate-500 mt-6 leading-relaxed">
+                Dengan menekan tombol Bayar, Anda menyetujui Syarat & Ketentuan
+                serta Kebijakan Privasi Belajar Net.
+              </p>
+            </div>
+          </div>
+        </div>
       </main>
     );
   }

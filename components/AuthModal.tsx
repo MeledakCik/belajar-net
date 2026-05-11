@@ -323,21 +323,24 @@ export default function AuthModal({
                         : "Sign Up"}
                   </Button>
                 </div>
-
-                <div className="flex items-center gap-3 py-2">
-                  <div className="h-[1px] flex-1 bg-white/10"></div>
-                  <span className="text-[10px] text-gray-500 uppercase tracking-tighter">
-                    Or continue with
-                  </span>
-                  <div className="h-[1px] flex-1 bg-white/10"></div>
-                </div>
-
-                <div className="flex justify-center gap-4">
-                  <SocialButton icon="https://www.svgrepo.com/show/475656/google-color.svg" />
-                  <SocialButton icon="https://www.svgrepo.com/show/475647/facebook-color.svg" />
-                  <SocialButton icon="https://www.svgrepo.com/show/475658/instagram-color.svg" />
-                </div>
               </div>
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
             </CardContent>
           </Card>
         </div>
