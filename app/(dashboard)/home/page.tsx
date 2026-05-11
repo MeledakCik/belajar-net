@@ -233,14 +233,14 @@ export default function BelajarNetPage() {
                     status={isLocked ? "locked" : "completed"}
                     label={`${lvl.id}.1`}
                     title="Quest Intro"
-                    icon="icon-1.png" // Tambahkan prop icon
+                    icon="icon-1.png" 
                   />
 
                   <LevelNode
                     status={isLocked ? "locked" : "current"}
                     label={`${lvl.id}.2`}
                     title="Practical Lab"
-                    icon="icon-2.png" // Tambahkan prop icon
+                    icon="icon-2.png"
                   />
                 </div>
               </section>
@@ -292,7 +292,6 @@ export default function BelajarNetPage() {
   );
 }
 
-// Sub-components sederhana
 function NavItem({ label, active }: any) {
   return (
     <div
