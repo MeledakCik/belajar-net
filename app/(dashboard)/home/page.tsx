@@ -138,10 +138,12 @@ export default function BelajarNetPage() {
         </div>
 
         <nav className="space-y-2">
-          <NavItem label="Command Center" active />
-          <NavItem label="Project Lab" />
-          <NavItem label="Hall of Fame" />
-          <NavItem label="Security Quest" />
+          <NavItem label="Dashboard" active />
+          <NavItem label="Leaderboard" />
+          <NavItem label="Streaks" />
+          <NavItem label="Learning Path" />
+          <NavItem label="Profile" />
+          <NavItem label="Settings" />
         </nav>
 
         <div className="mt-auto group p-4 bg-white/10 border border-white/10 rounded-3xl">
@@ -160,8 +162,8 @@ export default function BelajarNetPage() {
           </div>
         </div>
       </aside>
-      <main className="flex-1 lg:ml-72 lg:mr-80 flex flex-col items-center py-10 px-4 mb-24 lg:mb-0">
-        <div className="w-full max-w-3xl flex justify-between items-center mb-10 bg-[#1e2931]/80 p-4 rounded-3xl border border-white/10 backdrop-blur-md">
+      <main className="flex-1 lg:ml-72 lg:mr-80 flex flex-col items-center py-8 px-4 mb-24 lg:mb-0">
+        <div className="w-full max-w-3xl flex justify-between items-center mb-10 bg-[#1e2931]/80 p-4 rounded-[10px] border border-white/10 backdrop-blur-md">
           <div className="flex gap-4">
             <TopStat icon="🔥" value={userStats.streak} />
             <TopStat icon="❤️" value={userStats.hearts} />
@@ -189,7 +191,7 @@ export default function BelajarNetPage() {
                 <p className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.3em]">
                   Mission
                 </p>
-                <h3 className="text-xl font-black text-white italic tracking-tighter">
+                <h3 className="text-xl font-black text-white tracking-tighter">
                   START
                 </h3>
               </div>
@@ -222,26 +224,69 @@ export default function BelajarNetPage() {
 
                 <div className="flex flex-col items-center space-y-16 relative">
                   <div
-                    className={`absolute top-0 bottom-0 w-[2px] ${
+                    className={`absolute top-0 bottom-0 w-[2px] left-1/2 -translate-x-1/2 ${
                       isLocked
                         ? "bg-white/5"
                         : "bg-gradient-to-b from-indigo-500/40 via-indigo-500/20 to-transparent"
                     }`}
                   />
 
-                  <LevelNode
-                    status={isLocked ? "locked" : "completed"}
-                    label={`${lvl.id}.1`}
-                    title="Quest Intro"
-                    icon="icon-1.png" 
-                  />
-
-                  <LevelNode
-                    status={isLocked ? "locked" : "current"}
-                    label={`${lvl.id}.2`}
-                    title="Practical Lab"
-                    icon="icon-2.png"
-                  />
+                  <div className="w-full flex justify-center -ml-32">
+                    <LevelNode
+                      status={isLocked ? "locked" : "current"}
+                      label={`${lvl.id}.1`}
+                      title="Quest Intro"
+                      isRight={false}
+                    />
+                  </div>
+                  <div className="w-full flex justify-center -mr-32">
+                    <LevelNode
+                      status={isLocked ? "locked" : "locked"}
+                      label={`${lvl.id}.2`}
+                      title="Practical Lab"
+                      isRight={true}
+                    />
+                  </div>
+                  <div className="w-full flex justify-center -ml-32">
+                    <LevelNode
+                      status={isLocked ? "locked" : "locked"}
+                      label={`${lvl.id}.3`}
+                      title="Deep Dive"
+                      isRight={false}
+                    />
+                  </div>
+                  <div className="w-full flex justify-center -mr-32">
+                    <LevelNode
+                      status={isLocked ? "locked" : "locked"}
+                      label={`${lvl.id}.2`}
+                      title="Practical Lab"
+                      isRight={true}
+                    />
+                  </div>
+                  <div className="w-full flex justify-center -ml-32">
+                    <LevelNode
+                      status={isLocked ? "locked" : "locked"}
+                      label={`${lvl.id}.3`}
+                      title="Deep Dive"
+                      isRight={false}
+                    />
+                  </div>
+                  <div className="w-full flex justify-center -mr-32">
+                    <LevelNode
+                      status={isLocked ? "locked" : "locked"}
+                      label={`${lvl.id}.2`}
+                      title="Practical Lab"
+                      isRight={true}
+                    />
+                  </div>
+                  <div className="w-full flex justify-center -ml-32">
+                    <LevelNode
+                      status={isLocked ? "locked" : "locked"}
+                      label={`${lvl.id}.3`}
+                      title="Deep Dive"
+                      isRight={false}
+                    />
+                  </div>
                 </div>
               </section>
             );
@@ -249,7 +294,7 @@ export default function BelajarNetPage() {
         </div>
       </main>
       <aside className="hidden lg:flex w-80 p-8 flex-col gap-8 fixed right-0 h-full bg-[#1a2329]/80 border-l border-white/10">
-        <div className="p-6 bg-[#12181b] border border-white/10 rounded-[2.5rem]">
+        <div className="p-6 bg-[#12181b] border border-white/10 rounded-[10px]">
           <h3 className="text-xs font-black text-white/40 uppercase mb-4">
             Total Progress
           </h3>
@@ -266,7 +311,7 @@ export default function BelajarNetPage() {
 
         <div className="flex-1 flex flex-col gap-4 overflow-y-auto max-h-[500px] pr-2 custom-scrollbar">
           <h3 className="text-xs font-black text-white/40 uppercase px-2">
-            Top Sentinel
+            Top Leaderboard
           </h3>
           {allUsers.length > 0 ? (
             allUsers.map((u, index) => (
@@ -295,7 +340,7 @@ export default function BelajarNetPage() {
 function NavItem({ label, active }: any) {
   return (
     <div
-      className={`px-5 py-3 rounded-2xl text-xs uppercase tracking-widest cursor-pointer ${active ? "bg-indigo-600 text-white font-bold" : "text-white/50"}`}
+      className={`px-5 py-3 rounded-[10px] text-xs uppercase tracking-widest cursor-pointer ${active ? "bg-indigo-600 text-white font-bold" : "text-white/50"}`}
     >
       {label}
     </div>
@@ -309,27 +354,34 @@ function TopStat({ icon, value }: any) {
     </div>
   );
 }
-function LevelNode({ status, label, title }: any) {
+function LevelNode({ status, label, title, isRight }: any) {
   const color =
     status === "locked"
       ? "bg-[#2d3a43] opacity-50"
       : status === "completed"
         ? "bg-cyan-500"
         : "bg-indigo-600 scale-110 shadow-indigo-500/50 shadow-xl";
+
   return (
-    <div className="z-10 flex items-center gap-4 w-52">
+    <div
+      className={`z-10 flex items-center gap-4 w-full max-w-[320px] ${isRight ? "flex-row" : "flex-row-reverse text-right"}`}
+    >
       <div
-        className={`w-14 h-14 rounded-2xl flex items-center justify-center border-2 border-white/10 ${color}`}
+        className={`w-14 h-14 rounded-2xl flex items-center justify-center border-2 border-white/10 shrink-0 transition-all duration-500 ${color}`}
       >
         <span className="text-xs font-black text-white">
           {status === "locked" ? "🔒" : label}
         </span>
       </div>
-      <p
-        className={`text-[10px] font-black uppercase ${status === "locked" ? "text-white/20" : "text-white"}`}
-      >
-        {title}
-      </p>
+      <div className="flex flex-col">
+        <p
+          className={`text-[10px] font-black uppercase tracking-widest ${
+            status === "locked" ? "text-white/20" : "text-white"
+          }`}
+        >
+          {title}
+        </p>
+      </div>
     </div>
   );
 }
