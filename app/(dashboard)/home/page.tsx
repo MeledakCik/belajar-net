@@ -284,11 +284,12 @@ export default function BelajarNetPage() {
           )}
         </div>
       </aside>
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#1a2329]/95 backdrop-blur-xl border-t border-white/10 px-6 py-3 flex justify-between items-center z-[100]">
-        <MobileNavItem icon="🏠" active />
-        <MobileNavItem icon="🏆" />
-        <MobileNavItem icon="⚡" />
-        <MobileNavItem icon="👤" />
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#1a2329]/95 backdrop-blur-xl border-t border-white/10 px-4 py-3 flex justify-around items-end z-[100] pb-5">
+        <MobileNavItem icon="🏠" label="Home" active />
+        <MobileNavItem icon="🏆" label="Rank" />
+        <MobileNavItem icon="⚡" label="Streak" />
+        <MobileNavItem icon="🗺️" label="Path" />
+        <MobileNavItem icon="👤" label="Profile" />
       </nav>
     </div>
   );
@@ -304,12 +305,25 @@ function NavItem({ label, active }: any) {
   );
 }
 
-function MobileNavItem({ icon, active }: any) {
+function MobileNavItem({ icon, label, active }: any) {
   return (
     <div
-      className={`p-3 rounded-2xl transition-all ${active ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/40 scale-110" : "text-white/40"}`}
+      className={`flex flex-col items-center gap-1 flex-1 transition-all duration-300 ${active ? "scale-110" : "opacity-50"}`}
     >
-      <span className="text-xl">{icon}</span>
+      <div
+        className={`p-3 rounded-2xl transition-all ${
+          active
+            ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/40"
+            : "text-white/70 hover:bg-white/5"
+        }`}
+      >
+        <span className="text-2xl leading-none">{icon}</span>
+      </div>
+      <span
+        className={`text-[9px] font-black uppercase tracking-tighter ${active ? "text-indigo-400" : "text-white/40"}`}
+      >
+        {label}
+      </span>
     </div>
   );
 }
