@@ -33,7 +33,6 @@ export default function BelajarNetPage() {
     const savedUser = localStorage.getItem("userLoginData");
 
     if (!savedUser) {
-      console.log("No user found in localStorage, opening modal.");
       setIsAuthOpen(true);
       return;
     }
@@ -43,14 +42,11 @@ export default function BelajarNetPage() {
       const userId = userData.id || userData.displayId;
 
       if (userData?.isLoggedIn && userId) {
-        console.log("User ID detected:", userId);
         fetchUserProfile(userId);
       } else {
-        console.warn("Invalid user data structure.");
         handleLogout();
       }
     } catch (e) {
-      console.error("Failed to parse user data.");
       handleLogout();
     }
   }, []);
@@ -136,17 +132,14 @@ export default function BelajarNetPage() {
             BELAJARNET
           </h1>
         </div>
-
         <nav className="space-y-2">
           <NavItem label="Dashboard" active />
           <NavItem label="Leaderboard" />
           <NavItem label="Streaks" />
           <NavItem label="Learning Path" />
           <NavItem label="Profile" />
-          <NavItem label="Settings" />
         </nav>
-
-        <div className="mt-auto group p-4 bg-white/10 border border-white/10 rounded-3xl">
+        <div className="mt-auto p-4 bg-white/10 border border-white/10 rounded-3xl">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center font-bold text-white uppercase">
               {getUserInitial()}
@@ -162,17 +155,17 @@ export default function BelajarNetPage() {
           </div>
         </div>
       </aside>
-      <main className="flex-1 lg:ml-72 lg:mr-80 flex flex-col items-center py-8 px-4 mb-24 lg:mb-0">
-        <div className="w-full max-w-3xl flex justify-between items-center mb-10 bg-[#1e2931]/80 p-4 rounded-[10px] border border-white/10 backdrop-blur-md">
-          <div className="flex gap-4">
+      <main className="flex-1 lg:ml-72 lg:mr-80 flex flex-col items-center py-8 px-4 mb-24 lg:mb-0 w-full overflow-x-hidden">
+        <div className="w-full max-w-3xl flex justify-between items-center mb-10 bg-[#1e2931]/80 p-4 rounded-2xl border border-white/10 backdrop-blur-md sticky top-4 z-40">
+          <div className="flex gap-2 sm:gap-4">
             <TopStat icon="🔥" value={userStats.streak} />
             <TopStat icon="❤️" value={userStats.hearts} />
           </div>
           <div className="text-right">
-            <p className="text-[9px] font-black text-white/50 uppercase tracking-widest">
+            <p className="text-[8px] sm:text-[9px] font-black text-white/50 uppercase tracking-widest">
               Rank XP
             </p>
-            <p className="text-sm font-bold text-indigo-400">
+            <p className="text-xs sm:text-sm font-bold text-indigo-400">
               {userStats.xp} XP
             </p>
           </div>
@@ -186,7 +179,6 @@ export default function BelajarNetPage() {
                   <span className="text-3xl">🚀</span>
                 </div>
               </div>
-
               <div className="mt-4 text-center">
                 <p className="text-[10px] font-black text-indigo-400 uppercase tracking-[0.3em]">
                   Mission
@@ -195,27 +187,22 @@ export default function BelajarNetPage() {
                   START
                 </h3>
               </div>
-
               <div className="w-[2px] h-20 bg-gradient-to-b from-indigo-500 to-transparent mt-4" />
             </div>
           </section>
+
           {learningPath.map((lvl) => {
             const isLocked = lvl.id > currentUserLevel;
-
             return (
               <section key={lvl.id} className="relative">
                 <div className="flex items-center gap-4 mb-12">
                   <div
-                    className={`px-3 py-1 rounded-full text-[9px] font-black tracking-widest ${
-                      isLocked
-                        ? "bg-white/10 text-white/30"
-                        : "bg-indigo-600 text-white"
-                    }`}
+                    className={`px-3 py-1 rounded-full text-[9px] font-black tracking-widest ${isLocked ? "bg-white/10 text-white/30" : "bg-indigo-600 text-white"}`}
                   >
                     LEVEL {lvl.id}
                   </div>
                   <h2
-                    className={`text-xl font-bold uppercase tracking-tight ${isLocked ? "text-white/20" : "text-white"}`}
+                    className={`text-lg sm:text-xl font-bold uppercase tracking-tight ${isLocked ? "text-white/20" : "text-white"}`}
                   >
                     {lvl.name}
                   </h2>
@@ -224,22 +211,18 @@ export default function BelajarNetPage() {
 
                 <div className="flex flex-col items-center space-y-16 relative">
                   <div
-                    className={`absolute top-0 bottom-0 w-[2px] left-1/2 -translate-x-1/2 ${
-                      isLocked
-                        ? "bg-white/5"
-                        : "bg-gradient-to-b from-indigo-500/40 via-indigo-500/20 to-transparent"
-                    }`}
+                    className={`absolute top-0 bottom-0 w-[2px] left-1/2 -translate-x-1/2 ${isLocked ? "bg-white/5" : "bg-gradient-to-b from-indigo-500/40 via-indigo-500/20 to-transparent"}`}
                   />
 
-                  <div className="w-full flex justify-center -ml-32">
+                  <div className="w-full flex justify-center -ml-16 sm:-ml-32">
                     <LevelNode
-                      status={isLocked ? "locked" : "current"}
+                      status={isLocked ? "locked" : "completed"}
                       label={`${lvl.id}.1`}
                       title="Quest Intro"
                       isRight={false}
                     />
                   </div>
-                  <div className="w-full flex justify-center -mr-32">
+                  <div className="w-full flex justify-center -mr-16 sm:-mr-32">
                     <LevelNode
                       status={isLocked ? "locked" : "locked"}
                       label={`${lvl.id}.2`}
@@ -247,39 +230,7 @@ export default function BelajarNetPage() {
                       isRight={true}
                     />
                   </div>
-                  <div className="w-full flex justify-center -ml-32">
-                    <LevelNode
-                      status={isLocked ? "locked" : "locked"}
-                      label={`${lvl.id}.3`}
-                      title="Deep Dive"
-                      isRight={false}
-                    />
-                  </div>
-                  <div className="w-full flex justify-center -mr-32">
-                    <LevelNode
-                      status={isLocked ? "locked" : "locked"}
-                      label={`${lvl.id}.2`}
-                      title="Practical Lab"
-                      isRight={true}
-                    />
-                  </div>
-                  <div className="w-full flex justify-center -ml-32">
-                    <LevelNode
-                      status={isLocked ? "locked" : "locked"}
-                      label={`${lvl.id}.3`}
-                      title="Deep Dive"
-                      isRight={false}
-                    />
-                  </div>
-                  <div className="w-full flex justify-center -mr-32">
-                    <LevelNode
-                      status={isLocked ? "locked" : "locked"}
-                      label={`${lvl.id}.2`}
-                      title="Practical Lab"
-                      isRight={true}
-                    />
-                  </div>
-                  <div className="w-full flex justify-center -ml-32">
+                  <div className="w-full flex justify-center -ml-16 sm:-ml-32">
                     <LevelNode
                       status={isLocked ? "locked" : "locked"}
                       label={`${lvl.id}.3`}
@@ -294,13 +245,13 @@ export default function BelajarNetPage() {
         </div>
       </main>
       <aside className="hidden lg:flex w-80 p-8 flex-col gap-8 fixed right-0 h-full bg-[#1a2329]/80 border-l border-white/10">
-        <div className="p-6 bg-[#12181b] border border-white/10 rounded-[10px]">
+        <div className="p-6 bg-[#12181b] border border-white/10 rounded-2xl">
           <h3 className="text-xs font-black text-white/40 uppercase mb-4">
             Total Progress
           </h3>
           <div className="h-3 bg-white/10 rounded-full overflow-hidden">
             <div
-              className="h-full bg-indigo-500"
+              className="h-full bg-indigo-500 transition-all duration-1000"
               style={{ width: `${userStats.progress}%` }}
             />
           </div>
@@ -333,6 +284,12 @@ export default function BelajarNetPage() {
           )}
         </div>
       </aside>
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 bg-[#1a2329]/95 backdrop-blur-xl border-t border-white/10 px-6 py-3 flex justify-between items-center z-[100]">
+        <MobileNavItem icon="🏠" active />
+        <MobileNavItem icon="🏆" />
+        <MobileNavItem icon="⚡" />
+        <MobileNavItem icon="👤" />
+      </nav>
     </div>
   );
 }
@@ -340,44 +297,54 @@ export default function BelajarNetPage() {
 function NavItem({ label, active }: any) {
   return (
     <div
-      className={`px-5 py-3 rounded-[10px] text-xs uppercase tracking-widest cursor-pointer ${active ? "bg-indigo-600 text-white font-bold" : "text-white/50"}`}
+      className={`px-5 py-3 rounded-xl text-xs uppercase tracking-widest cursor-pointer transition-all ${active ? "bg-indigo-600 text-white font-bold shadow-lg shadow-indigo-500/20" : "text-white/50 hover:text-white hover:bg-white/5"}`}
     >
       {label}
     </div>
   );
 }
-function TopStat({ icon, value }: any) {
+
+function MobileNavItem({ icon, active }: any) {
   return (
-    <div className="flex items-center gap-2 px-3 py-1 bg-white/10 rounded-xl border border-white/10">
-      <span className="text-lg">{icon}</span>
-      <p className="text-xs font-black text-white">{value}</p>
+    <div
+      className={`p-3 rounded-2xl transition-all ${active ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/40 scale-110" : "text-white/40"}`}
+    >
+      <span className="text-xl">{icon}</span>
     </div>
   );
 }
+
+function TopStat({ icon, value }: any) {
+  return (
+    <div className="flex items-center gap-1.5 px-3 py-1 bg-white/5 rounded-xl border border-white/10">
+      <span className="text-sm sm:text-lg">{icon}</span>
+      <p className="text-[10px] sm:text-xs font-black text-white">{value}</p>
+    </div>
+  );
+}
+
 function LevelNode({ status, label, title, isRight }: any) {
   const color =
     status === "locked"
-      ? "bg-[#2d3a43] opacity-50"
+      ? "bg-[#2d3a43] opacity-40"
       : status === "completed"
         ? "bg-cyan-500"
         : "bg-indigo-600 scale-110 shadow-indigo-500/50 shadow-xl";
 
   return (
     <div
-      className={`z-10 flex items-center gap-4 w-full max-w-[320px] ${isRight ? "flex-row" : "flex-row-reverse text-right"}`}
+      className={`z-10 flex items-center gap-3 sm:gap-4 w-full max-w-[260px] sm:max-w-[320px] ${isRight ? "flex-row" : "flex-row-reverse text-right"}`}
     >
       <div
-        className={`w-14 h-14 rounded-2xl flex items-center justify-center border-2 border-white/10 shrink-0 transition-all duration-500 ${color}`}
+        className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center border-2 border-white/10 shrink-0 transition-all duration-500 ${color}`}
       >
-        <span className="text-xs font-black text-white">
+        <span className="text-[10px] sm:text-xs font-black text-white">
           {status === "locked" ? "🔒" : label}
         </span>
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col overflow-hidden">
         <p
-          className={`text-[10px] font-black uppercase tracking-widest ${
-            status === "locked" ? "text-white/20" : "text-white"
-          }`}
+          className={`text-[8px] sm:text-[10px] font-black uppercase tracking-widest truncate ${status === "locked" ? "text-white/20" : "text-white"}`}
         >
           {title}
         </p>
@@ -385,15 +352,19 @@ function LevelNode({ status, label, title, isRight }: any) {
     </div>
   );
 }
+
 function LeaderboardItem({ rank, name, xp, isMe }: any) {
   return (
     <div
-      className={`flex justify-between p-4 rounded-2xl border ${isMe ? "bg-indigo-500/20 border-indigo-500/50" : "bg-white/10 border-transparent"}`}
+      className={`flex justify-between p-4 rounded-2xl border transition-all ${isMe ? "bg-indigo-500/20 border-indigo-500/50 scale-[1.02]" : "bg-white/5 border-transparent hover:bg-white/10"}`}
     >
-      <span className="text-xs font-bold text-white truncate max-w-[100px]">
-        {name}
-      </span>
-      <span className="text-[10px] font-black text-white/50">{xp} XP</span>
+      <div className="flex gap-3 items-center">
+        <span className="text-[10px] font-black text-white/30">#{rank}</span>
+        <span className="text-xs font-bold text-white truncate max-w-[120px]">
+          {name}
+        </span>
+      </div>
+      <span className="text-[10px] font-black text-cyan-400">{xp} XP</span>
     </div>
   );
 }
