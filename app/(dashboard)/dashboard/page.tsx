@@ -453,10 +453,25 @@ export default function Dashboard() {
                 <button
                   onClick={() => {
                     if (selected2) {
-                      const jalur = sources2.find(
+                      const jalurItem = sources2.find(
                         (s) => s.id === selected2,
-                      )?.label;
-                      setSelectedJalur(jalur || "");
+                      );
+                      const jalurLabel = jalurItem?.label || "";
+
+                      // Membuat objek JSON data pilihan user
+                      const tempLearningData = {
+                        id_jalur: selected2,
+                        nama_jalur: jalurLabel,
+                        pilihAt: new Date().toISOString(),
+                      };
+
+                      // Menyimpan sementara dalam format JSON string ke LocalStorage
+                      localStorage.setItem(
+                        "tempLearningData",
+                        JSON.stringify(tempLearningData),
+                      );
+
+                      setSelectedJalur(jalurLabel);
                       setStep(3);
                       setSelected2("");
                     }
@@ -811,7 +826,7 @@ export default function Dashboard() {
                     Kembali
                   </button>
                   <button
-                    onClick={() => {
+                    onClick={async () => {
                       if (selected5 === "pro") {
                         setStep(6);
                       } else {
@@ -827,6 +842,34 @@ export default function Dashboard() {
                           isLoggedIn: true,
                           lastLogin: new Date().toISOString(),
                         };
+                        const savedJalurData = JSON.parse(
+                          localStorage.getItem("tempLearningData") || "{}",
+                        );
+
+                        try {
+                          await fetch(
+                            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/save-path`,
+                            {
+                              method: "POST",
+                              headers: {
+                                "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify({
+                                displayId: urlId,
+                                id_jalur: savedJalurData.id_jalur || "",
+                                nama_jalur: savedJalurData.nama_jalur || "",
+                                plan_type: selected5, 
+                              }),
+                            },
+                          );
+
+                          localStorage.removeItem("tempLearningData");
+                        } catch (error) {
+                          console.error(
+                            "Gagal menyimpan jalur ke database:",
+                            error,
+                          );
+                        }
 
                         localStorage.setItem(
                           "userLoginData",
